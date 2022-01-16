@@ -13,6 +13,8 @@ dependencies {
     implementation(kotlin("stdlib"))
 
     implementation(project(":service"))
+    implementation(project(":repository"))
+    implementation(project(":repository-device"))
 
     val koinVersion = dependency.version.koin
     implementation("io.insert-koin:koin-core:$koinVersion")

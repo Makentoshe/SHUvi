@@ -1,8 +1,6 @@
-package com.makentoshe.shuvi.service.hello.repository
+package com.makentoshe.shuvi.repository.hello
 
-interface HelloRepository {
-    fun getHello(): String
-}
+import com.makentoshe.shuvi.repository.HelloRepository
 
 class HelloRepositoryImpl: HelloRepository {
     override fun getHello(): String {

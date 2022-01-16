@@ -1,9 +1,10 @@
 package com.makentoshe.shuvi.service.device
 
+import com.makentoshe.shuvi.repository.DeviceRepository
 import com.makentoshe.shuvi.service.DeviceService
 import kotlinx.html.*
 
-class DeviceServiceImpl : DeviceService {
+class DeviceServiceImpl(private val repository: DeviceRepository) : DeviceService {
 
     override fun html(): (HTML.() -> Unit) = {
         val name = "Makentoshe"
@@ -14,12 +15,12 @@ class DeviceServiceImpl : DeviceService {
         }
         body {
             h5 {
-                +"Hello from $name!"
+                +"Devices: ${repository.getDevices()}!"
             }
         }
     }
 
     override fun json(): String {
-        return "{ test: \"json\" }"
+        return "{ test: \"json\", devices: [${repository.getDevices().joinToString(", ")}] }"
     }
 }

@@ -28,9 +28,11 @@ fun main() {
 
 fun Application.configureRouting(component: RoutingComponent) {
     routing {
+
         get("/") {
             call.respondText("Hello World!")
         }
+
         get(component.helloService.routing) {
             call.respondText(component.helloService.sayHello())
         }
