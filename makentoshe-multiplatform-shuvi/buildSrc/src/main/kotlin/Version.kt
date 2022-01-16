@@ -7,6 +7,9 @@ object Version {
 
     const val logback = "1.2.10"
 
+    // https://insert-koin.io/docs/setup/v3
+    const val koin = "3.1.5"
+
 //    // https://github.com/Kotlin/kotlinx.serialization#using-the-plugins-block
 //    const val serialization = "1.5.31"
 //

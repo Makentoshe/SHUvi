@@ -16,12 +16,19 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":service"))
+    implementation(project(":service-hello"))
+
     val ktorVersion = dependency.version.ktor
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-host-common:$ktorVersion")
     implementation("io.ktor:ktor-server-status-pages:$ktorVersion")
     implementation("io.ktor:ktor-server-cio:$ktorVersion")
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
+
+    val koinVersion = dependency.version.koin
+    implementation("io.insert-koin:koin-core:$koinVersion")
+    implementation("io.insert-koin:koin-ktor:$koinVersion")
 
     val logbackVersion = dependency.version.logback
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
