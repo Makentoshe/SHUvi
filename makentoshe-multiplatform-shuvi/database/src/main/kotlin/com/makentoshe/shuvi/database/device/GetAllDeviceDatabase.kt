@@ -1,8 +1,7 @@
-package com.makentoshe.shuvi.repository
+package com.makentoshe.shuvi.database.device
 
 import com.makentoshe.shuvi.entity.Device
 
-interface DeviceRepository {
-
+interface GetAllDeviceDatabase {
     fun getDevices(): List<Device>
 }

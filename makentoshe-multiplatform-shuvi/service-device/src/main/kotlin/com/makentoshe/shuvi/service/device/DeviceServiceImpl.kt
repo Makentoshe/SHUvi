@@ -7,6 +7,7 @@ import kotlinx.html.*
 class DeviceServiceImpl(private val repository: DeviceRepository) : DeviceService {
 
     override fun html(): (HTML.() -> Unit) = {
+        val devices = repository.getDevices()
         val name = "Makentoshe"
         head {
             title {
@@ -14,13 +15,13 @@ class DeviceServiceImpl(private val repository: DeviceRepository) : DeviceServic
             }
         }
         body {
-            h5 {
-                +"Devices: ${repository.getDevices()}!"
-            }
+            div { +"Devices count: ${devices.count()}" }
+            div { +"Devices: $devices" }
         }
     }
 
     override fun json(): String {
-        return "{ test: \"json\", devices: [${repository.getDevices().joinToString(", ")}] }"
+        val devices = repository.getDevices()
+        return "{ test: \"json\", devices: [${devices.joinToString(", ")}] }"
     }
 }

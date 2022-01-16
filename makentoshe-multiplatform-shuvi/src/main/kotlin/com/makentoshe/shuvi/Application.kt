@@ -1,5 +1,6 @@
 package com.makentoshe.shuvi
 
+import com.makentoshe.shuvi.database.di.MongoDatabaseModule
 import com.makentoshe.shuvi.service.DeviceService
 import com.makentoshe.shuvi.service.HelloService
 import com.makentoshe.shuvi.service.device.di.DeviceServiceModule
@@ -21,7 +22,7 @@ class RoutingComponent : KoinComponent {
 }
 
 fun main() {
-    startKoin { modules(HelloServiceModule, DeviceServiceModule) }
+    startKoin { modules(MongoDatabaseModule, HelloServiceModule, DeviceServiceModule) }
     val routingComponent = RoutingComponent()
     embeddedServer(CIO, port = 8080, host = "127.0.0.1") { configureRouting(routingComponent) }.start(wait = true)
 }
@@ -43,6 +44,11 @@ fun Application.configureRouting(component: RoutingComponent) {
                 ".json" -> call.respondText(component.deviceService.json())
                 else -> call.respond(HttpStatusCode.NotFound)
             }
+        }
+
+        get("/device/create") {
+
+            component.deviceService
         }
     }
 }

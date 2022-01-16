@@ -19,6 +19,7 @@ dependencies {
     implementation(project(":service"))
     implementation(project(":service-hello"))
     implementation(project(":service-device"))
+    implementation(project(":database-mongo"))
 
     val ktorVersion = dependency.version.ktor
     implementation("io.ktor:ktor-server-core:$ktorVersion")

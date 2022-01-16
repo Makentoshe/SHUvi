@@ -11,8 +11,4 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-
-    implementation(project(":entity"))
-    implementation(project(":repository"))
-    implementation(project(":database"))
 }
