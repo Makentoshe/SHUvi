@@ -3,7 +3,7 @@ object Version {
     const val kotlin = "1.6.10"
 
     // https://github.com/ktorio/ktor
-    const val ktor = "2.0.0-beta-1"
+    const val ktor = "1.6.7"
 
     const val logback = "1.2.10"
 

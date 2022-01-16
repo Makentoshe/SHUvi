@@ -18,12 +18,13 @@ repositories {
 dependencies {
     implementation(project(":service"))
     implementation(project(":service-hello"))
+    implementation(project(":service-device"))
 
     val ktorVersion = dependency.version.ktor
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-host-common:$ktorVersion")
-    implementation("io.ktor:ktor-server-status-pages:$ktorVersion")
     implementation("io.ktor:ktor-server-cio:$ktorVersion")
+    implementation("io.ktor:ktor-html-builder:$ktorVersion")
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
 
     val koinVersion = dependency.version.koin

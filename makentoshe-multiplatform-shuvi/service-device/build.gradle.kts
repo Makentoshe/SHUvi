@@ -12,6 +12,12 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
 
+    implementation(project(":service"))
+
+    val koinVersion = dependency.version.koin
+    implementation("io.insert-koin:koin-core:$koinVersion")
+    implementation("io.insert-koin:koin-ktor:$koinVersion")
+
     val ktorVersion = dependency.version.ktor
     implementation("io.ktor:ktor-html-builder:$ktorVersion")
 }
