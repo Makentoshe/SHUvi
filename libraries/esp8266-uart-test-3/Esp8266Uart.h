@@ -1,9 +1,9 @@
 #ifndef Esp8266Uart_h
 #define Esp8266Uart_h
 
+#include "SoftwareSerialFork.h"
 #include "Esp8266Request.h"
 #include "Esp8266Response.h"
-#include <SoftwareSerial.h>
 
 class Esp8266Uart {
 
@@ -12,15 +12,19 @@ class Esp8266Uart {
     
     ~Esp8266Uart();
 
-    // Returns true if command was accepted and started to execute.
-    // Return false if class is buzy with other command and current 
-    // request was refused
+    /* Returns: 
+     *  true - if command was accepted and started to execute.
+     *  false - if class is buzy with other command and current request was refused.
+     */
     boolean command(Esp8266Request * command);
-    
+
+    /*
+     * Returns a response which contains a pointer to request object and other stuff like bytes, isSuccessful, etc.
+     */
     Esp8266Response * collect();
 
   private:
-    SoftwareSerial * mSerial;
+    SoftwareSerialFork * mSerial;
     Esp8266Request * mCurrentRequest;
     boolean mIsBusy;
 };

@@ -10,6 +10,10 @@ struct Esp8266Response {
       this->mIsSuccess = isSuccess;
     }
 
+    ~Esp8266Response() {
+      delete mRequest; // remove pointer to Eps8266Request object
+    }
+
     Esp8266Request * getRequest() {
       return mRequest;
     }

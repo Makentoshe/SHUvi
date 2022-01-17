@@ -9,6 +9,13 @@
 Esp8266Wrapper * espWrapper;
 Esp8266Uart * espUart;
 
+/* AT+CWLAP="Makentoshe","9219547112"
+ * WIFI CONNECTED
+ * WIFI GOT IP
+ * 
+ * OK
+ */
+
 void setup() {
   Serial.begin(9600);
 
@@ -17,9 +24,13 @@ void setup() {
 }
 
 void loop() {
-  auto string = espUart->collect();
-//  Serial.print("Collected=");
-//  Serial.println(string);
+  auto response = espUart->collect();
+  Serial.print("Status=");
+  if (response == NULL) {
+    Serial.println("null");
+  } else {
+    Serial.println(response->isSuccess());
+  }
 
   delay(1000);
 
