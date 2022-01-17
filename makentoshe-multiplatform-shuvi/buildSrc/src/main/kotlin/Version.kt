@@ -2,6 +2,10 @@ object Version {
 
     const val kotlin = "1.6.10"
 
+    const val serialization = "1.6.10"
+
+    const val serializationJson = "1.3.2"
+
     // https://github.com/ktorio/ktor
     const val ktor = "1.6.7"
 

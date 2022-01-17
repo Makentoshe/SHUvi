@@ -1,6 +1,7 @@
 plugins {
     application
     kotlin("jvm") version Dependency.version.kotlin
+    kotlin("plugin.serialization") version Dependency.version.serialization
 }
 
 group = dependency.build.group
@@ -16,9 +17,11 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":entity"))
     implementation(project(":service"))
     implementation(project(":service-hello"))
     implementation(project(":service-device"))
+    implementation(project(":service-device-create"))
     implementation(project(":database-mongo"))
 
     val ktorVersion = dependency.version.ktor
@@ -26,7 +29,11 @@ dependencies {
     implementation("io.ktor:ktor-server-host-common:$ktorVersion")
     implementation("io.ktor:ktor-server-cio:$ktorVersion")
     implementation("io.ktor:ktor-html-builder:$ktorVersion")
+    implementation("io.ktor:ktor-serialization:$ktorVersion")
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
+
+    val serializationJsonVersion = dependency.version.serializationJson
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationJsonVersion")
 
     val koinVersion = dependency.version.koin
     implementation("io.insert-koin:koin-core:$koinVersion")
