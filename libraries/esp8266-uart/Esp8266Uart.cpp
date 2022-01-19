@@ -1,7 +1,7 @@
 #include "Esp8266Uart.h"
 
 Esp8266Uart::Esp8266Uart(uint8_t rxPin, uint8_t txPin) {
-  this->mSerial = new SoftwareSerialFork(rxPin, txPin);
+  this->mSerial = new SoftwareSerial(rxPin, txPin);
   this->mSerial->begin(115200);
 }
 

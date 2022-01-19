@@ -3,9 +3,6 @@
 #define ESP_RX_PIN 10
 #define ESP_TX_PIN 11
 
-#define WIFI_SSID ""
-#define WIFI_PASSWORD ""
-
 Esp8266Wrapper * espWrapper;
 Esp8266Uart * espUart;
 

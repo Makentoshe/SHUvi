@@ -1,7 +1,7 @@
 #ifndef Esp8266Uart_h
 #define Esp8266Uart_h
 
-#include "SoftwareSerialFork.h"
+#include <SoftwareSerial.h>
 #include "Esp8266Request.h"
 #include "Esp8266Response.h"
 
@@ -24,7 +24,7 @@ class Esp8266Uart {
     Esp8266Response * collect();
 
   private:
-    SoftwareSerialFork * mSerial;
+    SoftwareSerial * mSerial;
     Esp8266Request * mCurrentRequest;
     boolean mIsBusy;
 };
