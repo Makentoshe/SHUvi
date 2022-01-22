@@ -43,7 +43,7 @@ fun Application.configureRouting(component: RoutingComponent) {
         }
 
         get(component.helloService.routing) {
-            call.respondText(component.helloService.sayHello())
+            component.helloService.handle(call)
         }
 
         get(component.deviceService.routing) {
