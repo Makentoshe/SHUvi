@@ -14,8 +14,9 @@ dependencies {
 
     implementation(project(":database"))
     implementation(project(":service"))
+    implementation(project(":entity"))
     implementation(project(":repository"))
-//    implementation(project(":repository-device"))
+    implementation(project(":repository-device-create"))
 
     val koinVersion = dependency.version.koin
     implementation("io.insert-koin:koin-core:$koinVersion")
