@@ -1,17 +1,22 @@
-package com.makentoshe.shuvi.entity.service
+package com.makentoshe.shuvi.response.service
 
 import com.makentoshe.shuvi.entity.CreatedDevice
+import com.makentoshe.shuvi.entity.service.NetworkDevice
 import kotlinx.serialization.Serializable
-import java.lang.Exception
 
+/**
+ * Response on the create device request
+ */
 @Serializable
-sealed class NetworkCreatedDevice {
+sealed class NetworkCreatedDeviceResponse {
+
+    /** Device that should be created */
     abstract val device: NetworkDevice
 
     @Serializable
     data class Success(
         override val device: NetworkDevice,
-    ) : NetworkCreatedDevice() {
+    ) : NetworkCreatedDeviceResponse() {
         constructor(createdDevice: CreatedDevice) : this(NetworkDevice(createdDevice.device))
     }
 
@@ -20,7 +25,7 @@ sealed class NetworkCreatedDevice {
         override val device: NetworkDevice,
         val exception: String,
         val message: String,
-    ) : NetworkCreatedDevice() {
+    ) : NetworkCreatedDeviceResponse() {
         constructor(device: NetworkDevice, exception: Exception) : this(
             device = device,
             exception = exception.javaClass.simpleName,

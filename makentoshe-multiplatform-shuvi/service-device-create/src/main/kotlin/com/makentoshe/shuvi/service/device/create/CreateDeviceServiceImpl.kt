@@ -1,6 +1,6 @@
 package com.makentoshe.shuvi.service.device.create
 
-import com.makentoshe.shuvi.entity.service.NetworkCreatedDevice
+import com.makentoshe.shuvi.response.service.NetworkCreatedDeviceResponse
 import com.makentoshe.shuvi.entity.service.NetworkDevice
 import com.makentoshe.shuvi.repository.CreateDeviceRepository
 import com.makentoshe.shuvi.service.CreateDeviceService
@@ -14,9 +14,9 @@ class CreateDeviceServiceImpl(private val repository: CreateDeviceRepository) : 
         val receivedDevice = call.receive<NetworkDevice>()
 
         repository.createDevice(receivedDevice.toDevice()).bimap({ createdDevice ->
-            NetworkCreatedDevice.Success(createdDevice)
+            NetworkCreatedDeviceResponse.Success(createdDevice)
         }, { exception ->
-            NetworkCreatedDevice.Failure(receivedDevice, exception)
+            NetworkCreatedDeviceResponse.Failure(receivedDevice, exception)
         }).fold({ success ->
             call.respond(HttpStatusCode.OK, success)
         }, { failure ->
