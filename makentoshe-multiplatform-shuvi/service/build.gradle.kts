@@ -13,7 +13,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
 
-    implementation(project(":entity"))
+    implementation(project(dependency.module.entity))
 
     val serializationJsonVersion = dependency.version.serializationJson
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationJsonVersion")

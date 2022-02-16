@@ -17,12 +17,12 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":entity"))
-    implementation(project(":service"))
-    implementation(project(":service-hello"))
-    implementation(project(":service-device"))
-    implementation(project(":service-device-create"))
-    implementation(project(":database-mongo"))
+    implementation(project(dependency.module.entity))
+    implementation(project(dependency.module.service))
+    implementation(project(dependency.module.serviceHello))
+    implementation(project(dependency.module.serviceDevices))
+    implementation(project(dependency.module.serviceDeviceCreate))
+    implementation(project(dependency.module.databaseMongo))
 
     val ktorVersion = dependency.version.ktor
     implementation("io.ktor:ktor-server-core:$ktorVersion")

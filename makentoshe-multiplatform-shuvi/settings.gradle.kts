@@ -1,13 +1,19 @@
 rootProject.name = "Shuvi"
-include("service")
-include("service-hello")
+
 include("database")
 include("database-mongo")
-include("service-device")
+
+include("service")
 include("repository")
-include("repository-device")
+
+include("service-hello")
 include("repository-hello")
-include("entity")
+
+include("service-devices")
+include("repository-devices")
+
 include("service-device-create")
 include("repository-device-create")
+
 include("common")
+include("entity")

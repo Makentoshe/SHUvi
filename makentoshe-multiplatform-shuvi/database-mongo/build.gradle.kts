@@ -12,8 +12,8 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
 
-    implementation(project(":common"))
-    implementation(project(":database"))
+    implementation(project(dependency.module.common))
+    implementation(project(dependency.module.database))
 
     val koinVersion = dependency.version.koin
     implementation("io.insert-koin:koin-core:$koinVersion")

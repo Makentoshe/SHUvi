@@ -12,6 +12,6 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
 
-    implementation(project(":common"))
-    implementation(project(":entity"))
+    implementation(project(dependency.module.common))
+    implementation(project(dependency.module.entity))
 }

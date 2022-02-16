@@ -12,12 +12,12 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
 
-    implementation(project(":entity"))
-    implementation(project(":common"))
-    implementation(project(":database"))
-    implementation(project(":service"))
-    implementation(project(":repository"))
-    implementation(project(":repository-device"))
+    implementation(project(dependency.module.entity))
+    implementation(project(dependency.module.common))
+    implementation(project(dependency.module.database))
+    implementation(project(dependency.module.service))
+    implementation(project(dependency.module.repository))
+    implementation(project(dependency.module.repositoryDevices))
 
     val koinVersion = dependency.version.koin
     implementation("io.insert-koin:koin-core:$koinVersion")
