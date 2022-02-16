@@ -19,3 +19,4 @@ include("service-device")
 
 include("common")
 include("entity")
+include("repository-device")

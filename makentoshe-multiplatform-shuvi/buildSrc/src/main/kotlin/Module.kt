@@ -19,4 +19,5 @@ object Module {
     const val repositoryDeviceCreate = ":repository-device-create"
 
     const val serviceDevice = ":service-device"
+    const val repositoryDevice = ":repository-device"
 }

@@ -1,17 +1,22 @@
 package com.makentoshe.shuvi.service.device
 
+import com.makentoshe.shuvi.entity.DeviceId
+import com.makentoshe.shuvi.entity.service.NetworkDevice
+import com.makentoshe.shuvi.repository.DeviceRepository
 import com.makentoshe.shuvi.service.DeviceService
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.response.*
 
-class DeviceServiceImpl : DeviceService {
+class DeviceServiceImpl(private val deviceRepository: DeviceRepository) : DeviceService {
     override suspend fun handle(call: ApplicationCall) {
         val deviceId = call.parameters[deviceIdParameter]
-        if (deviceId == null) {
-            call.respond(HttpStatusCode.BadRequest, "Sas")
-        } else {
-            call.respond(HttpStatusCode.OK, deviceId)
-        }
+            ?: return call.respond(HttpStatusCode.BadRequest, "Sas")
+
+        deviceRepository.getDevice(DeviceId(deviceId)).fold({ device ->
+            call.respond(HttpStatusCode.OK, NetworkDevice(device))
+        },{ exception ->
+            call.respond(HttpStatusCode.OK, exception.toString())
+        })
     }
 }
