@@ -15,5 +15,7 @@ include("repository-devices")
 include("service-device-create")
 include("repository-device-create")
 
+include("service-device")
+
 include("common")
 include("entity")

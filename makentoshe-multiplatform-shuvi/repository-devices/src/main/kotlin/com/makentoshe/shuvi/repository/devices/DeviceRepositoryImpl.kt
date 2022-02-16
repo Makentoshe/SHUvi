@@ -1,4 +1,4 @@
-package com.makentoshe.shuvi.repository.device
+package com.makentoshe.shuvi.repository.devices
 
 import com.makentoshe.shuvi.database.Database
 import com.makentoshe.shuvi.repository.DeviceRepository
