@@ -15,6 +15,7 @@ dependencies {
     implementation(project(dependency.module.common))
     implementation(project(dependency.module.entity))
     implementation(project(dependency.module.service))
+    implementation(project(dependency.module.database))
     implementation(project(dependency.module.repository))
     implementation(project(dependency.module.repositoryDevice))
 

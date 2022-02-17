@@ -1,13 +1,14 @@
 package com.makentoshe.shuvi.repository.device
 
-import com.makentoshe.shuvi.common.Either
-import com.makentoshe.shuvi.entity.Device
+import com.makentoshe.shuvi.database.Database
 import com.makentoshe.shuvi.entity.DeviceId
 import com.makentoshe.shuvi.repository.DeviceRepository
 import com.makentoshe.shuvi.response.repository.GetDeviceResponse
 
-class DeviceRepositoryImpl : DeviceRepository {
+class DeviceRepositoryImpl(private val database: Database) : DeviceRepository {
     override fun getDevice(id: DeviceId): GetDeviceResponse {
-        return Either.Left(Device(id, "Repositoried"))
+        return database.device().get().id(id).mapLeft { databaseDevice ->
+            databaseDevice.toDevice()
+        }
     }
 }

@@ -7,6 +7,6 @@ import com.makentoshe.shuvi.service.device.DeviceServiceImpl
 import org.koin.dsl.module
 
 val DeviceServiceModule = module {
-    single<DeviceRepository> { DeviceRepositoryImpl() }
+    single<DeviceRepository> { DeviceRepositoryImpl(get()) }
     single<DeviceService> { DeviceServiceImpl(get()) }
 }
