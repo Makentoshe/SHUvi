@@ -10,8 +10,8 @@ import kotlinx.serialization.Serializable
  * See CreateDeviceServiceImpl, DeviceServiceImpl, DevicesServiceImpl
  * */
 @Serializable
-data class NetworkDevice(val id: String, val title: String) {
-    constructor(device: Device) : this(device.id.string, device.title)
+data class NetworkDevice(val id: String, val title: String, val sensors: List<NetworkSensor>) {
+    constructor(device: Device) : this(device.id.string, device.title, device.sensors.map(::NetworkSensor))
 
-    fun toDevice() = Device(DeviceId(id), title)
+    fun toDevice() = Device(DeviceId(id), title, sensors.map { it.toSensor() })
 }

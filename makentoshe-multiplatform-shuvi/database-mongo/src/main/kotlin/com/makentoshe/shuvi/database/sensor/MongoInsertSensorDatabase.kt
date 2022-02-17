@@ -8,7 +8,7 @@ import com.mongodb.client.MongoCollection
 class MongoInsertSensorDatabase(
     private val collection: MongoCollection<DatabaseSensor>,
 ) : InsertSensorDatabase {
-    override fun insert(sensor: DatabaseSensor): DatabaseInsertedSensorResponse {
-        return Either.Right(Exception("Stub"))
+    override fun insertSensor(sensor: DatabaseSensor): DatabaseInsertedSensorResponse {
+        return Either.Right(Exception("$sensor should be inserted here"))
     }
 }

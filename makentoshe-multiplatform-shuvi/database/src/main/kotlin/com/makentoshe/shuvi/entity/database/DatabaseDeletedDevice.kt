@@ -6,5 +6,5 @@ import com.makentoshe.shuvi.entity.DeletedDevice
 data class DatabaseDeletedDevice(
     val databaseDevice: DatabaseDevice,
 ) {
-    fun toDeletedDevice() = DeletedDevice(databaseDevice.toDevice())
+    fun toDeletedDevice() = DeletedDevice(databaseDevice.toDevice(emptyList()))
 }

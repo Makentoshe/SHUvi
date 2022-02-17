@@ -4,5 +4,5 @@ import com.makentoshe.shuvi.entity.database.DatabaseSensor
 import com.makentoshe.shuvi.response.database.DatabaseInsertedSensorResponse
 
 interface InsertSensorDatabase {
-    fun insert(sensor: DatabaseSensor): DatabaseInsertedSensorResponse
+    fun insertSensor(sensor: DatabaseSensor): DatabaseInsertedSensorResponse
 }

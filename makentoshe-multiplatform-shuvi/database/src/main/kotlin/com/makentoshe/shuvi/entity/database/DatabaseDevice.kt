@@ -2,6 +2,7 @@ package com.makentoshe.shuvi.entity.database
 
 import com.makentoshe.shuvi.entity.Device
 import com.makentoshe.shuvi.entity.DeviceId
+import com.makentoshe.shuvi.entity.Sensor
 
 data class DatabaseDevice(val id: String, val title: String) {
     @Suppress("unused", "PropertyName")
@@ -9,5 +10,6 @@ data class DatabaseDevice(val id: String, val title: String) {
 
     constructor(device: Device) : this(device.id.string, device.title)
 
-    fun toDevice() = Device(DeviceId(id), title)
+    fun toDevice(sensors: List<Sensor>) = Device(DeviceId(id), title, sensors)
+
 }
