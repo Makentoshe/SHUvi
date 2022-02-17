@@ -11,5 +11,8 @@ interface DeviceDatabase {
 
     /** Request to insert a new device into the Device database */
     fun insert(): InsertDeviceDatabase
+
+    /** Request to delete a device from the Device database */
+    fun delete() : DeleteDeviceDatabase
 }
 

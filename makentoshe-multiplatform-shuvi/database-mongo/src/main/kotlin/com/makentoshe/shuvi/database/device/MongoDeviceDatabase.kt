@@ -8,4 +8,6 @@ internal class MongoDeviceDatabase(private val database: MongoDatabase) : Device
     override fun get() = MongoGetDevicesDatabase(database.getCollection())
 
     override fun insert() = MongoInsertDeviceDatabase(database.getCollection())
+
+    override fun delete() = MongoDeleteDeviceDatabase(database.getCollection())
 }

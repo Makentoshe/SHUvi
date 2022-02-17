@@ -8,5 +8,5 @@ import org.koin.dsl.module
 
 val DeleteDeviceServiceModule = module {
     single<DeleteDeviceService> { DeleteDeviceServiceImpl(get()) }
-    single<DeleteDeviceRepository> { DeleteDeviceRepositoryImpl() }
+    single<DeleteDeviceRepository> { DeleteDeviceRepositoryImpl(get()) }
 }

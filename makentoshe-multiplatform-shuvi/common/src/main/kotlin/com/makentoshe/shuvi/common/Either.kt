@@ -61,7 +61,7 @@ fun <TLeft> Either<TLeft, Any>.leftOrNull(): TLeft? {
     return (this as? Either.Left)?.value
 }
 
-fun <TRight> Either<Unit, TRight>.right(): TRight {
+fun <TRight> Either<Any, TRight>.right(): TRight {
     return (this as Either.Right).value
 }
 
