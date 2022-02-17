@@ -68,3 +68,17 @@ fun <TRight> Either<Any, TRight>.right(): TRight {
 fun <TRight> Either<Any, TRight>.rightOrNull(): TRight? {
     return (this as? Either.Right)?.value
 }
+
+inline fun <TLeft, TRight, RRight> Either<TLeft, TRight>.flatMapRight(
+    f: (TRight) -> Either<TLeft, RRight>,
+): Either<TLeft, RRight> = when (this) {
+    is Either.Right -> f(this.value)
+    is Either.Left -> this
+}
+
+inline fun <TLeft, TRight, RLeft> Either<TLeft, TRight>.flatMapLeft(
+    f: (TLeft) -> Either<RLeft, TRight>,
+): Either<RLeft, TRight> = when (this) {
+    is Either.Right -> this
+    is Either.Left -> f(this.value)
+}
