@@ -19,7 +19,6 @@ repositories {
 dependencies {
     implementation(project(dependency.module.entity))
     implementation(project(dependency.module.service))
-    implementation(project(dependency.module.serviceHello))
     implementation(project(dependency.module.serviceDevices))
     implementation(project(dependency.module.serviceDeviceCreate))
     implementation(project(dependency.module.serviceDeviceDelete))

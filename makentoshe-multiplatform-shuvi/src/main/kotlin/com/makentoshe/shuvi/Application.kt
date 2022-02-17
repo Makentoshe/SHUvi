@@ -1,12 +1,14 @@
 package com.makentoshe.shuvi
 
 import com.makentoshe.shuvi.database.di.MongoDatabaseModule
-import com.makentoshe.shuvi.service.*
+import com.makentoshe.shuvi.service.CreateDeviceService
+import com.makentoshe.shuvi.service.DeleteDeviceService
+import com.makentoshe.shuvi.service.DeviceService
+import com.makentoshe.shuvi.service.DevicesService
 import com.makentoshe.shuvi.service.device.create.di.CreateDeviceServiceModule
 import com.makentoshe.shuvi.service.device.delete.di.DeleteDeviceServiceModule
 import com.makentoshe.shuvi.service.device.di.DeviceServiceModule
 import com.makentoshe.shuvi.service.devices.di.DevicesServiceModule
-import com.makentoshe.shuvi.service.hello.di.HelloServiceModule
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.response.*
@@ -20,7 +22,6 @@ import org.koin.core.component.inject
 import org.koin.core.context.startKoin
 
 class RoutingComponent : KoinComponent {
-    val helloService by inject<HelloService>()
     val devicesService by inject<DevicesService>()
     val createDeviceService by inject<CreateDeviceService>()
     val deviceService by inject<DeviceService>()
@@ -31,7 +32,6 @@ fun main() {
     startKoin {
         modules(
             MongoDatabaseModule,
-            HelloServiceModule,
             DevicesServiceModule,
             CreateDeviceServiceModule,
             DeviceServiceModule,
@@ -51,10 +51,6 @@ fun Application.configureRouting(component: RoutingComponent) {
 
         get("/") {
             call.respondText("Hello World!")
-        }
-
-        get(component.helloService.routing) {
-            component.helloService.handle(call)
         }
 
         get(component.devicesService.routing) {
