@@ -1,11 +1,9 @@
 package com.makentoshe.shuvi
 
 import com.makentoshe.shuvi.database.di.MongoDatabaseModule
-import com.makentoshe.shuvi.service.CreateDeviceService
-import com.makentoshe.shuvi.service.DeviceService
-import com.makentoshe.shuvi.service.DevicesService
-import com.makentoshe.shuvi.service.HelloService
+import com.makentoshe.shuvi.service.*
 import com.makentoshe.shuvi.service.device.create.di.CreateDeviceServiceModule
+import com.makentoshe.shuvi.service.device.delete.di.DeleteDeviceServiceModule
 import com.makentoshe.shuvi.service.device.di.DeviceServiceModule
 import com.makentoshe.shuvi.service.devices.di.DevicesServiceModule
 import com.makentoshe.shuvi.service.hello.di.HelloServiceModule
@@ -26,6 +24,7 @@ class RoutingComponent : KoinComponent {
     val devicesService by inject<DevicesService>()
     val createDeviceService by inject<CreateDeviceService>()
     val deviceService by inject<DeviceService>()
+    val deleteDeviceService by inject<DeleteDeviceService>()
 }
 
 fun main() {
@@ -36,6 +35,7 @@ fun main() {
             DevicesServiceModule,
             CreateDeviceServiceModule,
             DeviceServiceModule,
+            DeleteDeviceServiceModule,
         )
     }
     val routingComponent = RoutingComponent()
@@ -67,6 +67,10 @@ fun Application.configureRouting(component: RoutingComponent) {
 
         post(component.createDeviceService.routing) {
             component.createDeviceService.handle(call)
+        }
+
+        post(component.deleteDeviceService.routing) {
+            component.deleteDeviceService.handle(call)
         }
     }
 }

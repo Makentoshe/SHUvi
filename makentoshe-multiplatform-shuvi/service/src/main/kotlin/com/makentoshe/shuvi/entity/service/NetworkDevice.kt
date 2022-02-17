@@ -4,6 +4,11 @@ import com.makentoshe.shuvi.entity.Device
 import com.makentoshe.shuvi.entity.DeviceId
 import kotlinx.serialization.Serializable
 
+/**
+ * Requireable for devices creation and getting
+ *
+ * See CreateDeviceServiceImpl, DeviceServiceImpl, DevicesServiceImpl
+ * */
 @Serializable
 data class NetworkDevice(val id: String, val title: String) {
     constructor(device: Device) : this(device.id.string, device.title)
