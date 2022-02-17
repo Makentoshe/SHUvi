@@ -1,3 +1,4 @@
 package com.makentoshe.shuvi.entity
 
-class CreatedDevice(val device: Device, val isSuccess: Boolean)
+/** Device that was created */
+data class CreatedDevice(val device: Device, val isSuccess: Boolean)

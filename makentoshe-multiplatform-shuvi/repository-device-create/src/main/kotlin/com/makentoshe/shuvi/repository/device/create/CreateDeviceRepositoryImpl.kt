@@ -2,7 +2,7 @@ package com.makentoshe.shuvi.repository.device.create
 
 import com.makentoshe.shuvi.database.Database
 import com.makentoshe.shuvi.entity.CreatedDevice
-import com.makentoshe.shuvi.entity.CreatedDeviceResponse
+import com.makentoshe.shuvi.response.repository.CreatedDeviceResponse
 import com.makentoshe.shuvi.entity.Device
 import com.makentoshe.shuvi.entity.database.DatabaseDevice
 import com.makentoshe.shuvi.repository.CreateDeviceRepository

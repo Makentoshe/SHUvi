@@ -22,4 +22,5 @@ object Module {
     const val repositoryDevice = ":repository-device"
 
     const val serviceDeviceDelete = ":service-device-delete"
+    const val repositoryDeviceDelete = ":repository-device-delete"
 }
