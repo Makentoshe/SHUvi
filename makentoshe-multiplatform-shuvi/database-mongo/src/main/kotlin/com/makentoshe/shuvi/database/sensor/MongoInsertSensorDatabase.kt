@@ -5,7 +5,7 @@ import com.makentoshe.shuvi.entity.database.DatabaseSensor
 import com.makentoshe.shuvi.response.database.DatabaseInsertedSensorResponse
 import com.mongodb.client.MongoCollection
 
-class MongoInsertSensorDatabase(
+internal class MongoInsertSensorDatabase(
     private val collection: MongoCollection<DatabaseSensor>,
 ) : InsertSensorDatabase {
     override fun insertSensor(sensor: DatabaseSensor): DatabaseInsertedSensorResponse {
