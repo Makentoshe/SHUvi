@@ -7,7 +7,7 @@ import com.makentoshe.shuvi.response.repository.GetDevicesResponse
 class DevicesRepositoryImpl(private val database: Database) : DevicesRepository {
     override fun getDevices(): GetDevicesResponse {
         return database.device().get().all().mapLeft { databaseDevices ->
-            databaseDevices.map { databaseDevice -> databaseDevice.toDevice() }
+            databaseDevices.map { databaseDevice -> databaseDevice.toDevice(emptyList()) }
         }
     }
 }
