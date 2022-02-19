@@ -6,4 +6,6 @@ interface DeviceSensorsCrossrefDatabase {
     fun get(): GetDeviceSensorsCrossrefDatabase
 
     fun insert(): InsertDeviceSensorsCrossrefDatabase
+
+    fun exists(): ExistsDeviceSensorsCrossrefDatabase
 }

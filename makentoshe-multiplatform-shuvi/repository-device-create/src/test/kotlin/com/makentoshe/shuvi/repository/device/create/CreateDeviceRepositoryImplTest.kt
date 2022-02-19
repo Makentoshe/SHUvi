@@ -4,10 +4,7 @@ import com.makentoshe.shuvi.common.Either
 import com.makentoshe.shuvi.common.left
 import com.makentoshe.shuvi.common.right
 import com.makentoshe.shuvi.database.Database
-import com.makentoshe.shuvi.entity.Device
-import com.makentoshe.shuvi.entity.DeviceId
-import com.makentoshe.shuvi.entity.Sensor
-import com.makentoshe.shuvi.entity.SensorId
+import com.makentoshe.shuvi.entity.*
 import com.makentoshe.shuvi.entity.database.*
 import com.makentoshe.shuvi.entity.database.crossref.DatabaseDeviceSensorsCrossref
 import com.makentoshe.shuvi.entity.database.crossref.DatabaseInsertedDeviceSensorsCrossrefs
@@ -34,7 +31,7 @@ class CreateDeviceRepositoryImplTest {
         mockDatabase.`device should exists in database`(device)
 
         // Should return error
-        assert(repository.createDevice(device).isRight())
+        assert(repository.createDevice(device.toCreateDevice()).isRight())
     }
 
     @Test
@@ -50,7 +47,7 @@ class CreateDeviceRepositoryImplTest {
         mockDatabase.`sensors getting should cause exception`(sensors, sensorsException)
 
         // Check exception was handled
-        assertEquals(sensorsException, repository.createDevice(device).right())
+        assertEquals(sensorsException, repository.createDevice(device.toCreateDevice()).right())
     }
 
     @Test
@@ -72,7 +69,7 @@ class CreateDeviceRepositoryImplTest {
         mockDatabase.`sensors insertion should cause exception`(sensor3, exception)
 
         // Check exception was handled
-        assertEquals(exception, repository.createDevice(device).right())
+        assertEquals(exception, repository.createDevice(device.toCreateDevice()).right())
     }
 
     @Test
@@ -97,7 +94,7 @@ class CreateDeviceRepositoryImplTest {
         mockDatabase.`crossrefs insertion should cause exception`(listOf(sensor1, sensor3), exception)
 
         // Check exception was handled
-        assertEquals(exception, repository.createDevice(device).right())
+        assertEquals(exception, repository.createDevice(device.toCreateDevice()).right())
     }
 
     @Test
@@ -129,7 +126,7 @@ class CreateDeviceRepositoryImplTest {
         mockDatabase.`device insertion should cause exception`(device, exception)
 
         // Check exception was handled
-        assertEquals(exception, repository.createDevice(device).right())
+        assertEquals(exception, repository.createDevice(device.toCreateDevice()).right())
     }
 
     @Test
@@ -152,19 +149,52 @@ class CreateDeviceRepositoryImplTest {
         val crossref1 = DatabaseDeviceSensorsCrossref(device.id.string, sensor1.id.string)
         val crossref3 = DatabaseDeviceSensorsCrossref(device.id.string, sensor3.id.string)
         val insertedCrossrefs = DatabaseInsertedDeviceSensorsCrossrefs(listOf(crossref1, crossref3))
-        // Inserting a crossrefs into the database
+        // Inserting crossrefs into the database
         mockDatabase.`crossrefs insertion should be successful`(listOf(sensor1, sensor3), insertedCrossrefs)
 
-        // Inserting a device should cause an exception
+        // Inserting device
         mockDatabase.`device insertion should be successful`(device, InsertedDatabaseDevice(DatabaseDevice(device), true))
 
         // Check device was created
-        val createdDevice = repository.createDevice(device).left()
+        val createdDevice = repository.createDevice(device.toCreateDevice()).left()
         assertEquals(device, createdDevice.device)
     }
 
-    private fun createDevice(sensors: List<Sensor> = emptyList()) = Device(DeviceId("id"), "DeviceTitle", sensors)
+    @Test // TODO this is a simple mockup till device id generation wasn't extracted to other class
+    fun testShouldCreateDeviceRecordsWithoutProvidedIdInDatabase() {
+        // Device to add into the database
+        val device = createDevice(sensors)
+        // Device doesn't exist in the database
+        every { mockDatabase.database.device().get().id(DeviceId(any())) } returns Either.Right(Exception("Device not found"))
 
+        // Will be returned on sensors getting, but sensor1 and sensor3 were missed
+        val databaseGetSensors = DatabaseGetSensors(sensors.map { it.id }, listOf(sensor2))
+        // Sensors searching in the database
+        mockDatabase.`sensors getting should be successful`(sensors, databaseGetSensors)
+
+        // Missed sensors should be inserted into the database
+        mockDatabase.`sensors insertion should be successful`(sensor1, DatabaseInsertedSensor(DatabaseSensor(sensor1)))
+        mockDatabase.`sensors insertion should be successful`(sensor3, DatabaseInsertedSensor(DatabaseSensor(sensor3)))
+
+        // These crossrefs should be inserted along with the missed sensors and should be matched with their ids
+        val crossref1 = DatabaseDeviceSensorsCrossref(device.id.string, sensor1.id.string)
+        val crossref3 = DatabaseDeviceSensorsCrossref(device.id.string, sensor3.id.string)
+        val insertedCrossrefs = DatabaseInsertedDeviceSensorsCrossrefs(listOf(crossref1, crossref3))
+        // Inserting crossrefs into the database
+        mockDatabase.`crossrefs insertion should be successful`(listOf(sensor1, sensor3), insertedCrossrefs)
+
+        // Inserting device
+        every {
+            mockDatabase.database.device().insert().insertDevice(any())
+        } returns Either.Left(InsertedDatabaseDevice(DatabaseDevice(device), true))
+
+        // Check device was created
+        val createdDevice = repository.createDevice(device.toCreateDevice().copy(id = null)).left()
+        assert(createdDevice.device.id.string.length == 8)
+    }
+
+    private fun createDevice(sensors: List<Sensor> = emptyList()) =
+        Device(DeviceId("id"), "DeviceTitle", sensors)
 
     private fun MockDatabase.`device shouldnt exists in database`(
         device: Device,
@@ -237,6 +267,8 @@ class CreateDeviceRepositoryImplTest {
     ) = every {
         database.device().insert().insertDevice(match { databaseDevice -> databaseDevice.id == device.id.string })
     } returns Either.Left(insertedDatabaseDevice)
+
+    private fun Device.toCreateDevice() = CreateDevice(id, title, sensors)
 }
 
 @JvmInline

@@ -1,4 +1,4 @@
-package com.makentoshe.shuvi.response.database
+package com.makentoshe.shuvi.response.database.crossref
 
 import com.makentoshe.shuvi.common.Either
 import com.makentoshe.shuvi.entity.database.crossref.DatabaseDeviceSensorsCrossref

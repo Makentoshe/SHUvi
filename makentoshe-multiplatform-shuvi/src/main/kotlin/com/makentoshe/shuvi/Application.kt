@@ -44,7 +44,7 @@ fun main() {
 
 fun Application.configureRouting(component: RoutingComponent) {
     install(ContentNegotiation) {
-        json(Json { prettyPrint = true; isLenient = true })
+        json(Json { prettyPrint = true; isLenient = true; explicitNulls = true })
     }
 
     routing {

@@ -22,6 +22,7 @@ dependencies {
 
     testImplementation(dependency.library.junitApi)
     testRuntimeOnly(dependency.library.junitEngine)
+    implementation("org.apache.commons:commons-text:1.9")
 }
 tasks {
     test {

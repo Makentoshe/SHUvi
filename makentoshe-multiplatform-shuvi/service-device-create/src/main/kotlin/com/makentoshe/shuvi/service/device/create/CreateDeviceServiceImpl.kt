@@ -2,6 +2,7 @@ package com.makentoshe.shuvi.service.device.create
 
 import com.makentoshe.shuvi.common.Either
 import com.makentoshe.shuvi.common.flatMapLeft
+import com.makentoshe.shuvi.entity.service.NetworkCreateDevice
 import com.makentoshe.shuvi.entity.service.NetworkDevice
 import com.makentoshe.shuvi.repository.CreateDeviceRepository
 import com.makentoshe.shuvi.response.service.NetworkCreatedDeviceResponse
@@ -15,8 +16,8 @@ class CreateDeviceServiceImpl(private val repository: CreateDeviceRepository) : 
     override suspend fun handle(call: ApplicationCall) {
         receiveNetworkDevice(call).mapRight { exception ->
             NetworkCreatedDeviceResponse.Failure(exception)
-        }.flatMapLeft { networkDevice ->
-            repository.createDevice(networkDevice.toDevice()).bimap({ createdDevice ->
+        }.flatMapLeft { networkCreateDevice ->
+            repository.createDevice(networkCreateDevice.toCreateDevice()).bimap({ createdDevice ->
                 NetworkCreatedDeviceResponse.Success(createdDevice)
             }, { exception ->
                 NetworkCreatedDeviceResponse.Failure(exception)
@@ -29,7 +30,7 @@ class CreateDeviceServiceImpl(private val repository: CreateDeviceRepository) : 
     }
 
     private suspend fun receiveNetworkDevice(call: ApplicationCall) = try {
-        Either.Left(call.receive<NetworkDevice>())
+        Either.Left(call.receive<NetworkCreateDevice>())
     } catch (exception: Exception) {
         Either.Right(exception)
     }

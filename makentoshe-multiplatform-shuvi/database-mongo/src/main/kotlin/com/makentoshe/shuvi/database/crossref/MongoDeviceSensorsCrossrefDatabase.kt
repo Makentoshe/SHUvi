@@ -14,4 +14,8 @@ internal class MongoDeviceSensorsCrossrefDatabase(
     override fun insert(): InsertDeviceSensorsCrossrefDatabase {
         return MongoInsertDeviceSensorsCrossrefDatabase(collection)
     }
+
+    override fun exists(): ExistsDeviceSensorsCrossrefDatabase {
+        return MongoExistsDeviceSensorsCrossrefDatabase(collection)
+    }
 }
