@@ -4,6 +4,11 @@ import com.makentoshe.shuvi.entity.Device
 import com.makentoshe.shuvi.entity.DeviceId
 import com.makentoshe.shuvi.entity.Sensor
 
+@JvmInline
+value class DatabaseDeviceId(val string: String) {
+    fun toDeviceId() = DeviceId(string)
+}
+
 data class DatabaseDevice(val id: String, val title: String) {
     @Suppress("unused", "PropertyName")
     val _id: String = id
