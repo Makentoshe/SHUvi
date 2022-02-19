@@ -14,6 +14,12 @@ object Version {
     // https://insert-koin.io/docs/setup/v3
     const val koin = "3.1.5"
 
+    // for testing purposes - any module
+    const val junit = "5.8.1"
+
+    // https://github.com/mockk/mockk
+    const val mockk = "1.12.2"
+
 //    // https://github.com/Kotlin/kotlinx.serialization#using-the-plugins-block
 //    const val serialization = "1.5.31"
 //
@@ -41,10 +47,6 @@ object Version {
 //    // https://github.com/square/okhttp/
 //    const val okhttp = "4.1.0"
 //
-//    // for testing purposes - any module
-//    const val junit = "4.13"
-//
-//    const val mockk = "1.12.1"
 //
 //    // https://github.com/stephanenicolas/toothpick
 //    const val toothpick = "3.1.0"

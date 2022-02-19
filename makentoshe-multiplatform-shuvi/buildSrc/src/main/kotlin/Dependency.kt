@@ -5,4 +5,6 @@ object Dependency {
     val build = Build
 
     val module = Module
+
+    val library = Library
 }
