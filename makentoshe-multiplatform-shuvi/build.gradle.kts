@@ -22,6 +22,7 @@ dependencies {
     implementation(project(dependency.module.serviceDevices))
     implementation(project(dependency.module.serviceDeviceCreate))
     implementation(project(dependency.module.serviceDeviceDelete))
+    implementation(project(dependency.module.serviceSensorGet))
     implementation(project(dependency.module.serviceDevice))
     implementation(project(dependency.module.databaseMongo))
 

@@ -20,3 +20,5 @@ include("repository-device")
 
 include("service-device-delete")
 include("repository-device-delete")
+include("service-sensor")
+include("repository-sensor-get")

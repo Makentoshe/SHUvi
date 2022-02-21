@@ -9,9 +9,6 @@ object Module {
     const val service = ":service"
     const val repository = ":repository"
 
-    const val serviceHello = ":service-hello"
-    const val repositoryHello = ":repository-hello"
-
     const val serviceDevices = ":service-devices"
     const val repositoryDevices = ":repository-devices"
 
@@ -23,4 +20,7 @@ object Module {
 
     const val serviceDeviceDelete = ":service-device-delete"
     const val repositoryDeviceDelete = ":repository-device-delete"
+
+    const val serviceSensorGet = ":service-sensor"
+    const val repositorySensorGet = ":repository-sensor-get"
 }
