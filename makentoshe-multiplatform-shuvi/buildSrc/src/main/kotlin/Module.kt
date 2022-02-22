@@ -23,4 +23,7 @@ object Module {
 
     const val serviceSensorGet = ":service-sensor"
     const val repositorySensorGet = ":repository-sensor-get"
+
+    const val serviceSensorCreate = ":service-sensor-create"
+    const val repositorySensorCreate = ":repository-sensor-create"
 }

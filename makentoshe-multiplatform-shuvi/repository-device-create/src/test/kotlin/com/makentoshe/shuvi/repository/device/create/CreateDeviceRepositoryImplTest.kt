@@ -15,9 +15,9 @@ import org.junit.jupiter.api.Test
 
 class CreateDeviceRepositoryImplTest {
 
-    private val sensor1 = Sensor(SensorId("sensor1"))
-    private val sensor2 = Sensor(SensorId("sensor2"))
-    private val sensor3 = Sensor(SensorId("sensor3"))
+    private val sensor1 = Sensor(SensorId("sensor1"), "Title1")
+    private val sensor2 = Sensor(SensorId("sensor2"), "Title2")
+    private val sensor3 = Sensor(SensorId("sensor3"), "Title3")
     private val sensors = listOf(sensor1, sensor2, sensor3)
 
     private val mockDatabase = MockDatabase(mockk())

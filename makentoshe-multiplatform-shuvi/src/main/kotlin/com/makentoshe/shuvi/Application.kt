@@ -1,14 +1,12 @@
 package com.makentoshe.shuvi
 
 import com.makentoshe.shuvi.database.di.MongoDatabaseModule
-import com.makentoshe.shuvi.service.CreateDeviceService
-import com.makentoshe.shuvi.service.DeleteDeviceService
-import com.makentoshe.shuvi.service.DeviceService
-import com.makentoshe.shuvi.service.DevicesService
 import com.makentoshe.shuvi.service.device.create.di.CreateDeviceServiceModule
 import com.makentoshe.shuvi.service.device.delete.di.DeleteDeviceServiceModule
 import com.makentoshe.shuvi.service.device.di.DeviceServiceModule
 import com.makentoshe.shuvi.service.devices.di.DevicesServiceModule
+import com.makentoshe.shuvi.service.sensor.create.di.CreateSensorServiceModule
+import com.makentoshe.shuvi.service.sensor.di.GetSensorServiceModule
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.response.*
@@ -17,16 +15,7 @@ import io.ktor.serialization.*
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
 import kotlinx.serialization.json.Json
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import org.koin.core.context.startKoin
-
-class RoutingComponent : KoinComponent {
-    val devicesService by inject<DevicesService>()
-    val createDeviceService by inject<CreateDeviceService>()
-    val deviceService by inject<DeviceService>()
-    val deleteDeviceService by inject<DeleteDeviceService>()
-}
 
 fun main() {
     startKoin {
@@ -36,6 +25,8 @@ fun main() {
             CreateDeviceServiceModule,
             DeviceServiceModule,
             DeleteDeviceServiceModule,
+            GetSensorServiceModule,
+            CreateSensorServiceModule,
         )
     }
     val routingComponent = RoutingComponent()
@@ -67,6 +58,14 @@ fun Application.configureRouting(component: RoutingComponent) {
 
         post(component.deleteDeviceService.routing) {
             component.deleteDeviceService.handle(call)
+        }
+
+        get(component.getSensorService.routing) {
+            component.getSensorService.handle(call)
+        }
+
+        post(component.createSensorService.routing) {
+            component.createSensorService.handle(call)
         }
     }
 }

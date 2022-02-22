@@ -68,7 +68,7 @@ class CreateDeviceRepositoryImpl(private val database: Database) : CreateDeviceR
         databaseGetSensors.missedSensors.filter { sensorId -> // found all missed sensors
             database.sensor().get().id(sensorId).isRight()
         }.map { sensorId -> // insert missed sensors
-            database.sensor().insert().insertSensor(DatabaseSensor(sensorId.string))
+            database.sensor().insert().insertSensor(DatabaseSensor(sensorId.string, "TODO Createdevicerepo"))
         }.mapNotNull { databaseInsertedSensorResponse -> // find all insertion exceptions
             databaseInsertedSensorResponse.rightOrNull()
         }.forEach { exception -> throw exception } // throw 'em

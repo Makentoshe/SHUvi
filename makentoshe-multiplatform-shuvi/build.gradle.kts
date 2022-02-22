@@ -19,12 +19,15 @@ repositories {
 dependencies {
     implementation(project(dependency.module.entity))
     implementation(project(dependency.module.service))
+    implementation(project(dependency.module.databaseMongo))
+
+    implementation(project(dependency.module.serviceDevice))
     implementation(project(dependency.module.serviceDevices))
     implementation(project(dependency.module.serviceDeviceCreate))
     implementation(project(dependency.module.serviceDeviceDelete))
+
     implementation(project(dependency.module.serviceSensorGet))
-    implementation(project(dependency.module.serviceDevice))
-    implementation(project(dependency.module.databaseMongo))
+    implementation(project(dependency.module.serviceSensorCreate))
 
     val ktorVersion = dependency.version.ktor
     implementation("io.ktor:ktor-server-core:$ktorVersion")

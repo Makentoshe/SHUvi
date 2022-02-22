@@ -1,3 +1,4 @@
 package com.makentoshe.shuvi.entity
 
-data class CreateSensor(val id: SensorId? = null)
+/** Sensor that should be created */
+data class CreateSensor(val id: SensorId? = null, val title: String)

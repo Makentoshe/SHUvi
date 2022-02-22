@@ -12,15 +12,17 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
 
+    implementation(project(dependency.module.entity))
     implementation(project(dependency.module.common))
     implementation(project(dependency.module.database))
-    implementation(project(dependency.module.entity))
+    implementation(project(dependency.module.service))
+    implementation(project(dependency.module.repository))
+    implementation(project(dependency.module.repositorySensorCreate))
 
     val koinVersion = dependency.version.koin
     implementation("io.insert-koin:koin-core:$koinVersion")
+    implementation("io.insert-koin:koin-ktor:$koinVersion")
 
-    implementation("org.litote.kmongo:kmongo:4.4.0")
-    implementation("org.litote.kmongo:kmongo-coroutine:4.4.0")
-
-    implementation("org.apache.commons:commons-text:1.9")
+    val ktorVersion = dependency.version.ktor
+    implementation("io.ktor:ktor-html-builder:$ktorVersion")
 }
