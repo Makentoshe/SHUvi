@@ -8,5 +8,5 @@ import org.koin.dsl.module
 
 val CreateDeviceServiceModule = module {
     single<CreateDeviceService> { CreateDeviceServiceImpl(get()) }
-    single<CreateDeviceRepository> { CreateDeviceRepositoryImpl(get()) }
+    single<CreateDeviceRepository> { CreateDeviceRepositoryImpl(get(), get()) }
 }
