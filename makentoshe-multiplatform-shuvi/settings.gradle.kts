@@ -16,7 +16,7 @@ include("service-device-create")
 include("repository-device-create")
 
 include("service-device")
-include("repository-device")
+include("repository-device-get")
 
 include("service-device-delete")
 include("repository-device-delete")

@@ -1,6 +1,6 @@
 package com.makentoshe.shuvi.service.devices
 
-import com.makentoshe.shuvi.entity.service.NetworkDevice
+import com.makentoshe.shuvi.entity.service.NetworkDevice2
 import com.makentoshe.shuvi.repository.DevicesRepository
 import com.makentoshe.shuvi.response.service.NetworkGetDevicesResponse
 import com.makentoshe.shuvi.service.DevicesService
@@ -12,7 +12,7 @@ class DevicesServiceImpl(private val repository: DevicesRepository) : DevicesSer
 
     override suspend fun handle(call: ApplicationCall) {
         repository.getDevices().bimap({ devices ->
-            NetworkGetDevicesResponse.Success(devices.map(::NetworkDevice))
+            NetworkGetDevicesResponse.Success(devices.map(::NetworkDevice2))
         }, { exception ->
             NetworkGetDevicesResponse.Failure(exception)
         }).fold({ success ->

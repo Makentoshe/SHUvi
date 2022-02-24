@@ -7,6 +7,6 @@ import com.makentoshe.shuvi.service.device.create.CreateDeviceServiceImpl
 import org.koin.dsl.module
 
 val CreateDeviceServiceModule = module {
-    single<CreateDeviceService> { CreateDeviceServiceImpl(get()) }
+    single<CreateDeviceService> { CreateDeviceServiceImpl(get(), get()) }
     single<CreateDeviceRepository> { CreateDeviceRepositoryImpl(get(), get()) }
 }

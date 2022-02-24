@@ -16,7 +16,7 @@ object Module {
     const val repositoryDeviceCreate = ":repository-device-create"
 
     const val serviceDevice = ":service-device"
-    const val repositoryDevice = ":repository-device"
+    const val repositoryDevice = ":repository-device-get"
 
     const val serviceDeviceDelete = ":service-device-delete"
     const val repositoryDeviceDelete = ":repository-device-delete"

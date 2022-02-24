@@ -16,4 +16,15 @@ dependencies {
     implementation(project(dependency.module.entity))
     implementation(project(dependency.module.repository))
     implementation(project(dependency.module.database))
+    
+    // https://github.com/mockk/mockk
+    testImplementation(dependency.library.mockk)
+
+    testImplementation(dependency.library.junitApi)
+    testRuntimeOnly(dependency.library.junitEngine)
+}
+tasks {
+    test {
+        useJUnitPlatform()
+    }
 }

@@ -82,3 +82,15 @@ inline fun <TLeft, TRight, RLeft> Either<TLeft, TRight>.flatMapLeft(
     is Either.Right -> this
     is Either.Left -> f(this.value)
 }
+
+/** Converts List<Either<T, *> to Either<List<T>, *> */
+fun <TLeft, TRight> List<Either<TLeft, TRight>>.flattenLeft(): Either<List<TLeft>, TRight> {
+    val list = ArrayList<TLeft>()
+    forEach { either -> either.onRight { return Either.Right(it) }.onLeft { list.add(it) } }
+    return Either.Left(list)
+}
+
+fun <TLeft1, TLeft2, RLeft, TRight> Either<TLeft1, TRight>.andOtherLeft(
+    other: Either<TLeft2, TRight>,
+    f: (TLeft1, TLeft2) -> RLeft,
+) = flatMapLeft { first -> other.mapLeft { second -> f(first, second) } }

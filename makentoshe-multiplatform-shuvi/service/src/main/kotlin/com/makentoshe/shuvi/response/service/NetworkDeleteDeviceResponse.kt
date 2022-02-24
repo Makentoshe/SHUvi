@@ -1,7 +1,7 @@
 package com.makentoshe.shuvi.response.service
 
-import com.makentoshe.shuvi.entity.DeletedDevice
-import com.makentoshe.shuvi.entity.service.NetworkDevice
+import com.makentoshe.shuvi.entity.device.DeletedDevice
+import com.makentoshe.shuvi.entity.service.NetworkDevice2
 import com.makentoshe.shuvi.entity.service.NetworkDeviceId
 import kotlinx.serialization.Serializable
 
@@ -9,9 +9,9 @@ import kotlinx.serialization.Serializable
 sealed class NetworkDeleteDeviceResponse {
 
     @Serializable
-    data class Success(val device: NetworkDevice) : NetworkDeleteDeviceResponse() {
+    data class Success(val device: NetworkDevice2) : NetworkDeleteDeviceResponse() {
 
-        constructor(deletedDevice: DeletedDevice) : this(NetworkDevice(deletedDevice.device))
+        constructor(deletedDevice: DeletedDevice) : this(NetworkDevice2(deletedDevice.device))
     }
 
     @Serializable

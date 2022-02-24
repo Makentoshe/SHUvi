@@ -1,6 +1,6 @@
 package com.makentoshe.shuvi.response.service
 
-import com.makentoshe.shuvi.entity.service.NetworkDevice
+import com.makentoshe.shuvi.entity.service.NetworkDevice2
 import kotlinx.serialization.Serializable
 
 /**
@@ -11,7 +11,7 @@ sealed class NetworkGetDevicesResponse {
 
     @Serializable
     data class Success(
-        val devices: List<NetworkDevice>,
+        val devices: List<NetworkDevice2>,
     ) : NetworkGetDevicesResponse()
 
     @Serializable

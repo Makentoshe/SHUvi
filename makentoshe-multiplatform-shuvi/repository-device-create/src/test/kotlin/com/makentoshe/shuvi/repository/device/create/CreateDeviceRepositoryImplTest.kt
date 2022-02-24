@@ -3,9 +3,9 @@ package com.makentoshe.shuvi.repository.device.create
 import com.makentoshe.shuvi.common.Either
 import com.makentoshe.shuvi.common.database.DeviceIdGenerator
 import com.makentoshe.shuvi.database.Database
-import com.makentoshe.shuvi.entity.*
+import com.makentoshe.shuvi.entity.DeviceId
 import com.makentoshe.shuvi.entity.database.*
-import com.makentoshe.shuvi.entity.database.crossref.DatabaseInsertedDeviceSensorsCrossrefs
+import com.makentoshe.shuvi.entity.device.CreateDevice
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.spyk
@@ -20,7 +20,7 @@ class CreateDeviceRepositoryImplTest {
 
     @Test
     fun `test should return exception on already created device`() {
-        val createDevice = CreateDevice(DeviceId("id"), "title", emptyList())
+        val createDevice = CreateDevice(DeviceId("id"), "title")
 
         // device shouldn't exists in database
         every { mockDatabase.device().get().id(DeviceId(any())) } returns Either.Left(mockk())
@@ -31,7 +31,7 @@ class CreateDeviceRepositoryImplTest {
 
     @Test
     fun `test should return exception on device insertion issue`() {
-        val createDevice = CreateDevice(DeviceId("id"), "title", emptyList())
+        val createDevice = CreateDevice(DeviceId("id"), "title")
 
         // device shouldn't exists in database
         every { mockDatabase.device().get().id(DeviceId(any())) } returns Either.Right(Exception("Device not found"))
@@ -45,7 +45,7 @@ class CreateDeviceRepositoryImplTest {
 
     @Test
     fun `test should create device with provided id`() {
-        val createDevice = CreateDevice(DeviceId("id"), "title", emptyList())
+        val createDevice = CreateDevice(DeviceId("id"), "title")
 
         // device shouldn't exists in database
         every { mockDatabase.device().get().id(DeviceId(any())) } returns Either.Right(Exception("Device not found"))
@@ -60,7 +60,7 @@ class CreateDeviceRepositoryImplTest {
 
     @Test
     fun `test should create device without provided id`() {
-        val createDevice = CreateDevice(null, "title", emptyList())
+        val createDevice = CreateDevice(null, "title")
 
         // device shouldn't exists in database
         every { mockDatabase.device().get().id(DeviceId(any())) } returns Either.Right(Exception("Device not found"))
