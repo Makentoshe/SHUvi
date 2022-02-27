@@ -18,6 +18,7 @@ dependencies {
     implementation(project(dependency.module.entity))
     implementation(project(dependency.module.repository))
     implementation(project(dependency.module.repositoryDeviceCreate))
+    implementation(project(dependency.module.repositoryCrossrefSensorDeviceCreate))
 
     val koinVersion = dependency.version.koin
     implementation("io.insert-koin:koin-core:$koinVersion")

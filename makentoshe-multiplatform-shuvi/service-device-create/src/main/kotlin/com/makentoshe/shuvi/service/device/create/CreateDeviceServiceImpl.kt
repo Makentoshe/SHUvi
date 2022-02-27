@@ -8,6 +8,7 @@ import com.makentoshe.shuvi.entity.service.device.NetworkCreateDevice
 import com.makentoshe.shuvi.entity.service.device.toCreateDevice
 import com.makentoshe.shuvi.entity.service.sensor.toCreateSensor
 import com.makentoshe.shuvi.repository.CreateDeviceRepository
+import com.makentoshe.shuvi.repository.crossref.CreateSensorDeviceCrossrefRepository
 import com.makentoshe.shuvi.repository.sensor.CreateSensorRepository
 import com.makentoshe.shuvi.response.service.NetworkCreatedDeviceResponse
 import com.makentoshe.shuvi.service.CreateDeviceService
@@ -19,6 +20,7 @@ import io.ktor.response.*
 class CreateDeviceServiceImpl(
     private val createDeviceRepository: CreateDeviceRepository,
     private val createSensorRepository: CreateSensorRepository,
+    private val crossrefRepository: CreateSensorDeviceCrossrefRepository,
 ) : CreateDeviceService {
 
     override suspend fun handle(call: ApplicationCall) {
@@ -31,12 +33,14 @@ class CreateDeviceServiceImpl(
         val createdSensors = networkCreateDevice.flatMapLeft {
             it.sensors.map { createSensorRepository.create(it.toCreateSensor()) }.flattenLeft()
         }
-        //TODO bind created sensors to the created device
-
-        // create response based on previous results
+        // bind device and sensors
         createdDevice.andOtherLeft(createdSensors) { createdDevice, createdSensors ->
-            NetworkCreatedDeviceResponse.Success(createdDevice, createdSensors)
-        }.mapRight { exception ->
+            val sensorIds = createdSensors.map { createdSensor -> createdSensor.sensor.id }
+            // return success if binding is successful
+            crossrefRepository.createCrossrefs(createdDevice.device.id, sensorIds).mapLeft {
+                NetworkCreatedDeviceResponse.Success(createdDevice, createdSensors)
+            }
+        }.flattenLeft().mapRight { exception -> // update repository responses and prepare for networking
             NetworkCreatedDeviceResponse.Failure(exception)
         }.fold({ success ->
             call.respond(HttpStatusCode.OK, success)

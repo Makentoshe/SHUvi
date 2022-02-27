@@ -9,6 +9,8 @@ object Module {
     const val service = ":service"
     const val repository = ":repository"
 
+    const val repositoryCrossrefSensorDeviceCreate = ":repository-crossref-device-sensor-create"
+
     const val serviceDevices = ":service-devices"
     const val repositoryDevices = ":repository-devices"
 
