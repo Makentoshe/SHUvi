@@ -61,6 +61,11 @@ fun <TLeft> Either<TLeft, Any>.leftOrNull(): TLeft? {
     return (this as? Either.Left)?.value
 }
 
+fun <TLeft, TRight> Either<TLeft, TRight>.filterLeft2Right(right: TRight, f: (TLeft) -> Boolean) = when (this) {
+    is Either.Right -> this
+    is Either.Left -> if (f(value)) Either.Left(value) else Either.Right(right)
+}
+
 fun <TRight> Either<Any, TRight>.right(): TRight {
     return (this as Either.Right).value
 }

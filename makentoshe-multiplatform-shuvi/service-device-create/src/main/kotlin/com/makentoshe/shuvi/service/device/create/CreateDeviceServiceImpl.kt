@@ -23,15 +23,17 @@ class CreateDeviceServiceImpl(
 
     override suspend fun handle(call: ApplicationCall) {
         val networkCreateDevice = receiveNetworkDevice(call)
-
+        // create device
         val createdDevice = networkCreateDevice.flatMapLeft {
             createDeviceRepository.createDevice(it.toCreateDevice())
         }
-
+        // create sensors
         val createdSensors = networkCreateDevice.flatMapLeft {
             it.sensors.map { createSensorRepository.create(it.toCreateSensor()) }.flattenLeft()
         }
+        //TODO bind created sensors to the created device
 
+        // create response based on previous results
         createdDevice.andOtherLeft(createdSensors) { createdDevice, createdSensors ->
             NetworkCreatedDeviceResponse.Success(createdDevice, createdSensors)
         }.mapRight { exception ->
