@@ -1,4 +1,4 @@
-name: GitHub Actions Demo 2
+name: GitHub Actions Demo 3
 on: [ push ]
 jobs:
   Explore-GitHub-Actions:
