@@ -9,7 +9,7 @@ group = dependency.build.group
 version = dependency.build.versionName
 
 application {
-    mainClass.set("com.makentoshe.ApplicationKt")
+    mainClass.set("com.makentoshe.shuvi.ApplicationKt")
 }
 
 repositories {
