@@ -8,13 +8,12 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
-      - name: Move to server-side
-        run: |
-          cd ${{ github.workspace }}
-
       - name: List files in the repository
         run: |
           ls
+
+      - name: Move into server-side
+        run: cd makentoshe-multiplatform-shuvi
 
       - name: Make gradlew executable
         run: |
