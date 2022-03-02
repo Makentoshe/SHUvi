@@ -15,6 +15,10 @@ jobs:
       - name: Move into server-side
         run: cd makentoshe-multiplatform-shuvi
 
+      - name: List files in the repository
+        run: |
+          ls
+
       - name: Make gradlew executable
         run: |
           chmod +x gradlew
