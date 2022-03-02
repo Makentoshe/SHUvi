@@ -12,6 +12,10 @@ jobs:
         run: |
           ls ${{ github.workspace }}
 
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}/makentoshe-multiplatform-shuvi
+
       - name: Build server-side
         run: | 
           ${{ github.workspace }}/makentoshe-multiplatform-shuvi/.gradlew build
