@@ -8,17 +8,21 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
-      - name: List files in the repository
+      - name: Move to server-side
         run: |
-          ls ${{ github.workspace }}
+          cd ${{ github.workspace }}
 
       - name: List files in the repository
         run: |
-          ls ${{ github.workspace }}/makentoshe-multiplatform-shuvi
+          ls
+
+      - name: Make gradlew executable
+        run: |
+          chmod +x gradlew
 
       - name: Build server-side
         run: | 
-          ${{ github.workspace }}/makentoshe-multiplatform-shuvi/gradlew build
+          ./gradlew build
 
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
 
