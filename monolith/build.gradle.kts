@@ -2,6 +2,7 @@ plugins {
     application
     kotlin("jvm") version Dependency.version.kotlin
     kotlin("plugin.serialization") version Dependency.version.serialization
+    id(Dependency.build.plugins.shadowJar.id) version Dependency.build.plugins.shadowJar.version
 }
 
 group = dependency.build.group
@@ -51,4 +52,11 @@ dependencies {
 
     val kotlinJunitVersion = dependency.version.kotlin
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinJunitVersion")
+}
+
+tasks {
+    shadowJar {
+        archiveVersion.set("")
+        archiveClassifier.set("shadow")
+    }
 }
