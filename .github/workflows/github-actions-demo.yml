@@ -1,0 +1,31 @@
+name: GitHub Actions Demo 3
+on: [ push ]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: List files in the repository
+        run: |
+          ls
+
+      - name: Make gradlew executable
+        run: |
+          chmod +x gradlew
+
+      - name: Build server-side- to be sure all is ok
+        run: | 
+          ./gradlew build
+
+      - name: Build server-side fat-jar
+        run: |
+          ./gradlew shadowJar
+          
+      - name: Upload server-side fat-jar artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: monolith-shadow
+          path: monolith/build/libs/monolith-shadow.jar
