@@ -21,7 +21,7 @@ internal class MongoGetSensorDatabase(
 
     override fun ids(sensorIds: List<SensorId>): DatabaseGetSensorsResponse = try {
         val foundSensors = sensorIds.map { collection.find(DatabaseSensor::id eq it.string).first() }
-        Either.Left(DatabaseGetSensors(sensorIds, foundSensors.mapNotNull { it?.toSensor() }))
+        Either.Left(DatabaseGetSensors(sensorIds, foundSensors.filterNotNull()))
     } catch (exception: Exception) {
         Either.Right(exception)
     }

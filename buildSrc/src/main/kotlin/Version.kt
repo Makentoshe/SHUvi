@@ -6,6 +6,9 @@ object Version {
 
     const val serializationJson = "1.3.2"
 
+    // https://github.com/JetBrains/Exposed
+    const val exposed = "0.37.3"
+
     // https://github.com/ktorio/ktor
     const val ktor = "1.6.7"
 

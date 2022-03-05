@@ -51,7 +51,7 @@ class CreateDeviceRepositoryImplTest {
         every { mockDatabase.device().get().id(DeviceId(any())) } returns Either.Right(Exception("Device not found"))
 
         // insertion should be successful
-        val databaseInsertedDevice = InsertedDatabaseDevice(DatabaseDevice("stub", createDevice.title), true)
+        val databaseInsertedDevice = InsertedDatabaseDevice(DatabaseDevice("stub", createDevice.title))
         every { mockDatabase.device().insert().insertDevice(any()) } returns Either.Left(databaseInsertedDevice)
 
         // check repository action is successful
@@ -66,7 +66,7 @@ class CreateDeviceRepositoryImplTest {
         every { mockDatabase.device().get().id(DeviceId(any())) } returns Either.Right(Exception("Device not found"))
 
         // insertion should be successful
-        val databaseInsertedDevice = InsertedDatabaseDevice(DatabaseDevice("stub", createDevice.title), true)
+        val databaseInsertedDevice = InsertedDatabaseDevice(DatabaseDevice("stub", createDevice.title))
         every { mockDatabase.device().insert().insertDevice(any()) } returns Either.Left(databaseInsertedDevice)
 
         // check repository action is successful

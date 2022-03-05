@@ -22,7 +22,7 @@ dependencies {
 
     implementation(project(dependency.module.monolith.entity))
     implementation(project(dependency.module.monolith.service))
-    implementation(project(dependency.module.monolith.databaseMongo))
+    implementation(project(dependency.module.monolith.databasePostgres))
 
     implementation(project(dependency.module.monolith.serviceDevice))
     implementation(project(dependency.module.monolith.serviceDevices))

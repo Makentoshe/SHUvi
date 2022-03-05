@@ -1,26 +1,30 @@
 package com.makentoshe.shuvi
 
-import com.makentoshe.shuvi.database.di.MongoDatabaseModule
+import com.makentoshe.shuvi.di.database.PostgresDatabaseModule
 import com.makentoshe.shuvi.service.device.create.di.CreateDeviceServiceModule
 import com.makentoshe.shuvi.service.device.delete.di.DeleteDeviceServiceModule
 import com.makentoshe.shuvi.service.device.di.DeviceServiceModule
 import com.makentoshe.shuvi.service.devices.di.DevicesServiceModule
 import com.makentoshe.shuvi.service.sensor.create.di.CreateSensorServiceModule
 import com.makentoshe.shuvi.service.sensor.di.GetSensorServiceModule
-import io.ktor.application.*
-import io.ktor.features.*
-import io.ktor.response.*
-import io.ktor.routing.*
-import io.ktor.serialization.*
-import io.ktor.server.cio.*
-import io.ktor.server.engine.*
+import io.ktor.application.Application
+import io.ktor.application.call
+import io.ktor.application.install
+import io.ktor.features.ContentNegotiation
+import io.ktor.response.respondText
+import io.ktor.routing.get
+import io.ktor.routing.post
+import io.ktor.routing.routing
+import io.ktor.serialization.json
+import io.ktor.server.cio.CIO
+import io.ktor.server.engine.embeddedServer
 import kotlinx.serialization.json.Json
 import org.koin.core.context.startKoin
 
 fun main() {
     startKoin {
         modules(
-            MongoDatabaseModule,
+            PostgresDatabaseModule,
             DevicesServiceModule,
             CreateDeviceServiceModule,
             DeviceServiceModule,

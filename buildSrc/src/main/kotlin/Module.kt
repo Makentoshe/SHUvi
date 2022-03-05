@@ -11,6 +11,7 @@ object Monolith {
 
     const val database = ":monolith:database"
     const val databaseMongo = ":monolith:database-mongo"
+    const val databasePostgres = ":monolith:database-postgres"
 
     const val repository = ":monolith:repository"
     const val repositoryDevices = ":monolith:repository-devices"

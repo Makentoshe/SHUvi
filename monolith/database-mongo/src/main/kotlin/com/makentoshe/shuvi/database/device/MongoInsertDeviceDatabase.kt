@@ -11,8 +11,8 @@ internal class MongoInsertDeviceDatabase(
 ) : InsertDeviceDatabase {
 
     override fun insertDevice(device: DatabaseDevice): InsertedDatabaseDeviceResponse = try {
-        val insertOneResult = collection.insertOne(device)
-        Either.Left(InsertedDatabaseDevice(device, insertOneResult.wasAcknowledged()))
+        if (!collection.insertOne(device).wasAcknowledged()) throw Exception("Insertion wasn't acknowledged")
+        Either.Left(InsertedDatabaseDevice(device))
     } catch (exception: Exception) {
         Either.Right(exception)
     }
