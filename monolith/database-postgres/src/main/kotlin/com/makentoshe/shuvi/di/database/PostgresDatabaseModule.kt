@@ -19,7 +19,7 @@ val PostgresDatabaseModule = module {
 private fun datasource(): DataSource = PGDataSource().apply {
     serverName = "localhost"
     port = 5432
-    databaseName = "developmentdp"
+    databaseName = "developmentdb"
     user = "developer"
     password = "1243"
 }

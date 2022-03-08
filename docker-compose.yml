@@ -93,7 +93,7 @@ services:
       - postgres
 
   # service for building and holding a server app
-  web:
+  backend:
     container_name: monolith_server_container
     build: .
     volumes:
