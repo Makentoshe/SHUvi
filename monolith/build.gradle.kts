@@ -47,6 +47,9 @@ dependencies {
     implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("io.insert-koin:koin-ktor:$koinVersion")
 
+    val apacheCliVersion = "1.5.0"
+    implementation("commons-cli:commons-cli:$apacheCliVersion")
+
     val logbackVersion = dependency.version.logback
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
 

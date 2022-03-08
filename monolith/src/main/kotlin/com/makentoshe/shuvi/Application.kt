@@ -1,12 +1,7 @@
 package com.makentoshe.shuvi
 
-import com.makentoshe.shuvi.di.database.PostgresDatabaseModule
-import com.makentoshe.shuvi.service.device.create.di.CreateDeviceServiceModule
-import com.makentoshe.shuvi.service.device.delete.di.DeleteDeviceServiceModule
-import com.makentoshe.shuvi.service.device.di.DeviceServiceModule
-import com.makentoshe.shuvi.service.devices.di.DevicesServiceModule
-import com.makentoshe.shuvi.service.sensor.create.di.CreateSensorServiceModule
-import com.makentoshe.shuvi.service.sensor.di.GetSensorServiceModule
+import com.makentoshe.shuvi.cli.config.ServerConfig
+import com.makentoshe.shuvi.di.configureModules
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
@@ -19,24 +14,22 @@ import io.ktor.serialization.json
 import io.ktor.server.cio.CIO
 import io.ktor.server.engine.embeddedServer
 import kotlinx.serialization.json.Json
-import org.koin.core.context.startKoin
+import org.apache.commons.cli.CommandLine
+import org.apache.commons.cli.DefaultParser
+import org.apache.commons.cli.Options
 
-fun main() {
-    configureModules()
-    val routingComponent = RoutingComponent()
-    embeddedServer(CIO, port = 8080, host = "127.0.0.1") { configureRouting(routingComponent) }.start(wait = true)
+fun main(args: Array<String>) {
+    val options = Options().apply { com.makentoshe.shuvi.cli.CliOptions.list.forEach { addOption(it) } }
+    main(DefaultParser().parse(options, args))
 }
 
-private fun configureModules() = startKoin {
-    modules(
-        PostgresDatabaseModule,
-        DevicesServiceModule,
-        CreateDeviceServiceModule,
-        DeviceServiceModule,
-        DeleteDeviceServiceModule,
-        GetSensorServiceModule,
-        CreateSensorServiceModule,
-    )
+private fun main(commandLine: CommandLine) {
+    configureModules(commandLine)
+
+    val serverConfig = ServerConfig(commandLine)
+    embeddedServer(CIO, port = serverConfig.serverPort, host = serverConfig.serverHost) {
+        configureRouting(RoutingComponent())
+    }.start(wait = true)
 }
 
 private fun Application.configureRouting(component: RoutingComponent) {

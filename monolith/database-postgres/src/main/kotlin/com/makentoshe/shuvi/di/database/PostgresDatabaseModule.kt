@@ -10,16 +10,16 @@ import com.makentoshe.shuvi.database.PostgresDatabase
 import javax.sql.DataSource
 import org.koin.dsl.module
 
-val PostgresDatabaseModule = module {
-    single<Database> { PostgresDatabase(org.jetbrains.exposed.sql.Database.connect(datasource())) }
-    single<SensorIdGenerator> { SensorIdGeneratorImpl(size = 8, database = get()) }
-    single<DeviceIdGenerator> { DeviceIdGeneratorImpl(size = 8, database = get()) }
+fun PostgresDatabaseModule(idGeneratorConfig: IdGeneratorConfig, postgresConfig: PostgresDatabaseConfig) = module {
+    single<Database> { PostgresDatabase(org.jetbrains.exposed.sql.Database.connect(datasource(postgresConfig))) }
+    single<SensorIdGenerator> { SensorIdGeneratorImpl(size = idGeneratorConfig.sensorIdSize, database = get()) }
+    single<DeviceIdGenerator> { DeviceIdGeneratorImpl(size = idGeneratorConfig.deviceIdSize, database = get()) }
 }
 
-private fun datasource(): DataSource = PGDataSource().apply {
-    serverName = "localhost"
-    port = 5432
-    databaseName = "developmentdb"
-    user = "developer"
-    password = "1243"
+private fun datasource(config: PostgresDatabaseConfig): DataSource = PGDataSource().apply {
+    serverName = config.serverName
+    port = config.serverPort
+    databaseName = config.databaseName
+    user = config.userName
+    password = config.userPassword
 }
