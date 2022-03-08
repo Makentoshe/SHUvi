@@ -22,22 +22,24 @@ import kotlinx.serialization.json.Json
 import org.koin.core.context.startKoin
 
 fun main() {
-    startKoin {
-        modules(
-            PostgresDatabaseModule,
-            DevicesServiceModule,
-            CreateDeviceServiceModule,
-            DeviceServiceModule,
-            DeleteDeviceServiceModule,
-            GetSensorServiceModule,
-            CreateSensorServiceModule,
-        )
-    }
+    configureModules()
     val routingComponent = RoutingComponent()
     embeddedServer(CIO, port = 8080, host = "127.0.0.1") { configureRouting(routingComponent) }.start(wait = true)
 }
 
-fun Application.configureRouting(component: RoutingComponent) {
+private fun configureModules() = startKoin {
+    modules(
+        PostgresDatabaseModule,
+        DevicesServiceModule,
+        CreateDeviceServiceModule,
+        DeviceServiceModule,
+        DeleteDeviceServiceModule,
+        GetSensorServiceModule,
+        CreateSensorServiceModule,
+    )
+}
+
+private fun Application.configureRouting(component: RoutingComponent) {
     install(ContentNegotiation) {
         json(Json { prettyPrint = true; isLenient = true; explicitNulls = true })
     }
