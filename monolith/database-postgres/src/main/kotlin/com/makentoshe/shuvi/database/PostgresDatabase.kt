@@ -24,31 +24,3 @@ class PostgresDatabase(override val database: org.jetbrains.exposed.sql.Database
     override fun crossref(): CrossrefDatabase = PostgresCrossrefDatabase(database)
 
 }
-
-fun main() {
-//    Database.connect("jdbc:pgsql://localhost:12346/test", driver = "com.impossibl.postgres.jdbc.PGDriver",
-//        user = "root", password = "your_pwd")
-
-    val database = PGDataSource().apply {
-        serverName = "localhost"
-        port = 5432
-        databaseName = "developmentdp"
-        user = "developer"
-        password = "1243"
-    }.let(org.jetbrains.exposed.sql.Database::connect)
-
-    println(database.version)
-
-    transaction(database) {
-        PostgresInsertDeviceDatabase(database).insertDevice(DatabaseDevice("id2", "title2"))
-        DatabaseDeviceTable.selectAll().forEach { println(it) }
-    }
-
-//    println(PostgresGetSensorDatabase(database).ids(listOf(SensorId("abc"), SensorId("1234"))))
-    println(PostgresDeleteDeviceDatabase(database).id(DeviceId("id1")))
-
-    transaction(database) {
-        DatabaseDeviceTable.selectAll().forEach { println(it) }
-    }
-}
-
