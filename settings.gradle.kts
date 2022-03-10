@@ -6,6 +6,7 @@ include("monolith:entity")
 
 include("monolith:database")
 include("monolith:database-mongo")
+include("monolith:database-postgres")
 
 include("monolith:repository")
 include("monolith:repository-devices")

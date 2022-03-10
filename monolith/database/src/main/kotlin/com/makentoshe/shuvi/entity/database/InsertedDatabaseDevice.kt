@@ -7,5 +7,4 @@ typealias InsertedDatabaseDeviceResponse = Either<InsertedDatabaseDevice, Except
 /** Inserted device into the database */
 data class InsertedDatabaseDevice(
     val databaseDevice: DatabaseDevice,
-    val wasAcknowledged: Boolean,
 )

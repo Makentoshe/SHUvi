@@ -22,7 +22,7 @@ dependencies {
 
     implementation(project(dependency.module.monolith.entity))
     implementation(project(dependency.module.monolith.service))
-    implementation(project(dependency.module.monolith.databaseMongo))
+    implementation(project(dependency.module.monolith.databasePostgres))
 
     implementation(project(dependency.module.monolith.serviceDevice))
     implementation(project(dependency.module.monolith.serviceDevices))
@@ -46,6 +46,9 @@ dependencies {
     val koinVersion = dependency.version.koin
     implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("io.insert-koin:koin-ktor:$koinVersion")
+
+    val apacheCliVersion = "1.5.0"
+    implementation("commons-cli:commons-cli:$apacheCliVersion")
 
     val logbackVersion = dependency.version.logback
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
