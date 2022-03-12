@@ -1,9 +1,9 @@
 package com.makentoshe.shuvi
 
-import com.makentoshe.shuvi.service.CreateDeviceService
-import com.makentoshe.shuvi.service.DeleteDeviceService
-import com.makentoshe.shuvi.service.DeviceService
-import com.makentoshe.shuvi.service.DevicesService
+import com.makentoshe.shuvi.service.device.CreateDeviceService
+import com.makentoshe.shuvi.service.device.DeleteDeviceService
+import com.makentoshe.shuvi.service.device.DeviceService
+import com.makentoshe.shuvi.service.device.DevicesService
 import com.makentoshe.shuvi.service.sensor.CreateSensorService
 import com.makentoshe.shuvi.service.sensor.GetSensorService
 import org.koin.core.component.KoinComponent
