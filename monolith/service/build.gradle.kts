@@ -14,6 +14,7 @@ dependencies {
     implementation(kotlin("stdlib"))
 
     implementation(project(dependency.module.monolith.entity))
+    implementation(project(dependency.module.monolith.common))
 
     val serializationJsonVersion = dependency.version.serializationJson
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationJsonVersion")
