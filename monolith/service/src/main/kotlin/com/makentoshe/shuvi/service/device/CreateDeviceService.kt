@@ -1,4 +1,6 @@
-package com.makentoshe.shuvi.service
+package com.makentoshe.shuvi.service.device
+
+import com.makentoshe.shuvi.service.Service
 
 interface CreateDeviceService: Service {
     override val routing: String

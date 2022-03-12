@@ -1,4 +1,6 @@
-package com.makentoshe.shuvi.service
+package com.makentoshe.shuvi.service.device
+
+import com.makentoshe.shuvi.service.Service
 
 /** Service that displays list of all known devices */
 interface DevicesService : Service {
