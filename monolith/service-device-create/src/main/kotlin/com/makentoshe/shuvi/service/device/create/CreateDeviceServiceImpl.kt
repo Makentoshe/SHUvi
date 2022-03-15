@@ -1,6 +1,5 @@
 package com.makentoshe.shuvi.service.device.create
 
-import com.makentoshe.shuvi.common.Either
 import com.makentoshe.shuvi.common.andOtherLeft
 import com.makentoshe.shuvi.common.flatMapLeft
 import com.makentoshe.shuvi.common.flattenLeft
@@ -11,11 +10,10 @@ import com.makentoshe.shuvi.repository.CreateDeviceRepository
 import com.makentoshe.shuvi.repository.crossref.CreateSensorDeviceCrossrefRepository
 import com.makentoshe.shuvi.repository.sensor.CreateSensorRepository
 import com.makentoshe.shuvi.response.service.NetworkCreatedDeviceResponse
-import com.makentoshe.shuvi.service.CreateDeviceService
-import io.ktor.application.*
-import io.ktor.http.*
-import io.ktor.request.*
-import io.ktor.response.*
+import com.makentoshe.shuvi.service.ServiceCall
+import com.makentoshe.shuvi.service.device.CreateDeviceService
+import com.makentoshe.shuvi.service.receive
+import io.ktor.http.HttpStatusCode
 
 class CreateDeviceServiceImpl(
     private val createDeviceRepository: CreateDeviceRepository,
@@ -23,8 +21,8 @@ class CreateDeviceServiceImpl(
     private val crossrefRepository: CreateSensorDeviceCrossrefRepository,
 ) : CreateDeviceService {
 
-    override suspend fun handle(call: ApplicationCall) {
-        val networkCreateDevice = receiveNetworkDevice(call)
+    override suspend fun handle(call: ServiceCall) {
+        val networkCreateDevice = call.receive<NetworkCreateDevice>()
         // create device
         val createdDevice = networkCreateDevice.flatMapLeft {
             createDeviceRepository.createDevice(it.toCreateDevice())
@@ -47,11 +45,5 @@ class CreateDeviceServiceImpl(
         }, { failure ->
             call.respond(HttpStatusCode.InternalServerError, failure)
         })
-    }
-
-    private suspend fun receiveNetworkDevice(call: ApplicationCall) = try {
-        Either.Left(call.receive<NetworkCreateDevice>())
-    } catch (exception: Exception) {
-        Either.Right(exception)
     }
 }

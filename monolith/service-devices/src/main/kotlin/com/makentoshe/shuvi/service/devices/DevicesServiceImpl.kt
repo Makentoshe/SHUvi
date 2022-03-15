@@ -3,7 +3,7 @@ package com.makentoshe.shuvi.service.devices
 import com.makentoshe.shuvi.entity.service.NetworkDevice2
 import com.makentoshe.shuvi.repository.DevicesRepository
 import com.makentoshe.shuvi.response.service.NetworkGetDevicesResponse
-import com.makentoshe.shuvi.service.DevicesService
+import com.makentoshe.shuvi.service.device.DevicesService
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.response.*
