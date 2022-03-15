@@ -30,13 +30,7 @@ sealed class NetworkCreatedDeviceResponse {
     data class Failure(
         val exception: String,
         val message: String,
-        val device: NetworkDevice2? = null,
     ) : NetworkCreatedDeviceResponse() {
-        constructor(device: NetworkDevice2, exception: Exception) : this(
-            device = device,
-            exception = exception.javaClass.simpleName,
-            message = exception.message ?: "",
-        )
 
         constructor(exception: Exception) : this(
             exception = exception.javaClass.simpleName,

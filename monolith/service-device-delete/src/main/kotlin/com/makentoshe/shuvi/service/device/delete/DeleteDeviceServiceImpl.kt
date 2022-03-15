@@ -3,7 +3,7 @@ package com.makentoshe.shuvi.service.device.delete
 import com.makentoshe.shuvi.entity.service.NetworkDeviceId
 import com.makentoshe.shuvi.repository.DeleteDeviceRepository
 import com.makentoshe.shuvi.response.service.NetworkDeleteDeviceResponse
-import com.makentoshe.shuvi.service.DeleteDeviceService
+import com.makentoshe.shuvi.service.device.DeleteDeviceService
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
