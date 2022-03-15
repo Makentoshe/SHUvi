@@ -2,16 +2,6 @@ package com.makentoshe.shuvi.service
 
 import io.ktor.application.ApplicationCall
 import io.ktor.http.HttpMethod
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
-
-// Timestamp pattern
-private const val timestampPattern: String = "uuuu-MM-dd'T'HH:mm:ss.SSS O"
-
-private val timestampFormatter = DateTimeFormatter.ofPattern(timestampPattern)
-
-private val timestampZone = ZoneId.of("UTC")
 
 interface Service {
     val routing: String
@@ -23,6 +13,3 @@ interface Service {
 
     suspend fun handle(call: ServiceCall) = Unit
 }
-
-val Service.timestamp: String
-    get() = ZonedDateTime.now(timestampZone).format(timestampFormatter)

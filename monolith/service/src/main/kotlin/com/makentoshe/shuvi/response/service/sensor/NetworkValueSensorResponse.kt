@@ -1,7 +1,6 @@
 package com.makentoshe.shuvi.response.service.sensor
 
-import com.makentoshe.shuvi.entity.service.NetworkSensor2
-import java.util.Date
+import com.makentoshe.shuvi.entity.sensor.value.CreatedSensorValue
 import kotlinx.serialization.Serializable
 
 /**
@@ -15,7 +14,13 @@ sealed class NetworkValueSensorResponse {
         val sensorId: String,
         val value: Int,
         val timestamp: String,
-    ) : NetworkValueSensorResponse()
+    ) : NetworkValueSensorResponse() {
+        constructor(createdSensorValue: CreatedSensorValue) : this(
+            sensorId = createdSensorValue.sensorId.string,
+            value = createdSensorValue.value,
+            timestamp = createdSensorValue.timestamp,
+        )
+    }
 
     @Serializable
     data class Failure(
