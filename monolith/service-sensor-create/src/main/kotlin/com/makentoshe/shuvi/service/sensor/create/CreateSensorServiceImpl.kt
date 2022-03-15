@@ -1,23 +1,23 @@
 package com.makentoshe.shuvi.service.sensor.create
 
-import com.makentoshe.shuvi.common.Either
 import com.makentoshe.shuvi.common.flatMapLeft
-import com.makentoshe.shuvi.entity.service.NetworkSensor
-import com.makentoshe.shuvi.response.service.sensor.NetworkCreateSensor
+import com.makentoshe.shuvi.entity.service.NetworkSensor2
+import com.makentoshe.shuvi.entity.service.sensor.NetworkCreateSensor
+import com.makentoshe.shuvi.entity.service.sensor.toCreateSensor
 import com.makentoshe.shuvi.repository.sensor.CreateSensorRepository
 import com.makentoshe.shuvi.response.service.sensor.NetworkCreateSensorResponse
+import com.makentoshe.shuvi.service.ServiceCall
+import com.makentoshe.shuvi.service.receive
 import com.makentoshe.shuvi.service.sensor.CreateSensorService
-import io.ktor.application.*
-import io.ktor.http.*
-import io.ktor.request.*
-import io.ktor.response.*
+import io.ktor.http.HttpStatusCode
 
 class CreateSensorServiceImpl(private val createSensorRepository: CreateSensorRepository) : CreateSensorService {
-    override suspend fun handle(call: ApplicationCall) {
-        receiveNetworkCreateSensor(call).flatMapLeft { networkCreateSensor ->
+
+    override suspend fun handle(call: ServiceCall) {
+        call.receive<NetworkCreateSensor>().flatMapLeft { networkCreateSensor ->
             createSensorRepository.create(networkCreateSensor.toCreateSensor())
         }.bimap({ createdSensor ->
-            NetworkCreateSensorResponse.Success(NetworkSensor(createdSensor.sensor))
+            NetworkCreateSensorResponse.Success(NetworkSensor2(createdSensor.sensor))
         }, { exception ->
             NetworkCreateSensorResponse.Failure(exception)
         }).fold({ success ->
@@ -25,11 +25,5 @@ class CreateSensorServiceImpl(private val createSensorRepository: CreateSensorRe
         }, { failure ->
             call.respond(HttpStatusCode.InternalServerError, failure)
         })
-    }
-
-    private suspend fun receiveNetworkCreateSensor(call: ApplicationCall) = try {
-        Either.Left(call.receive<NetworkCreateSensor>())
-    } catch (exception: Exception) {
-        Either.Right(exception)
     }
 }
