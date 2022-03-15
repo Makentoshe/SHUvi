@@ -9,6 +9,7 @@ import io.ktor.features.ContentNegotiation
 import io.ktor.response.respondText
 import io.ktor.routing.get
 import io.ktor.routing.post
+import io.ktor.routing.route
 import io.ktor.routing.routing
 import io.ktor.serialization.json
 import io.ktor.server.cio.CIO
@@ -65,6 +66,10 @@ private fun Application.configureRouting(component: RoutingComponent) {
 
         post(component.createSensorService.routing) {
             component.createSensorService.handle(call)
+        }
+
+        route(component.valueSensorService.routing, component.valueSensorService.method) {
+            this.handle { component.valueSensorService.handle(call) }
         }
     }
 }

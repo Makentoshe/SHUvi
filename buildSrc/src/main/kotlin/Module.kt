@@ -29,6 +29,7 @@ object Monolith {
     const val serviceDeviceDelete = ":monolith:service-device-delete"
     const val serviceSensorGet = ":monolith:service-sensor"
     const val serviceSensorCreate = ":monolith:service-sensor-create"
+    const val serviceSensorValue = ":monolith:service-sensor-value"
 
     override fun toString() = ":monolith"
 }

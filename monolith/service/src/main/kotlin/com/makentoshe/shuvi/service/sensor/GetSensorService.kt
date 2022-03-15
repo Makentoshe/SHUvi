@@ -1,6 +1,7 @@
 package com.makentoshe.shuvi.service.sensor
 
 import com.makentoshe.shuvi.service.Service
+import io.ktor.http.HttpMethod
 
 interface GetSensorService : Service {
 
@@ -9,4 +10,7 @@ interface GetSensorService : Service {
 
     val sensorIdParameter: String
         get() = "sensorId"
+
+    override val method: HttpMethod
+        get() = HttpMethod.Get
 }
