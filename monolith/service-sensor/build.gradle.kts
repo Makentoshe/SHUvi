@@ -25,4 +25,15 @@ dependencies {
 
     val ktorVersion = dependency.version.ktor
     implementation("io.ktor:ktor-html-builder:$ktorVersion")
+
+    // https://github.com/mockk/mockk
+    testImplementation(dependency.library.mockk)
+
+    testImplementation(dependency.library.junitApi)
+    testRuntimeOnly(dependency.library.junitEngine)
+}
+tasks {
+    test {
+        useJUnitPlatform()
+    }
 }
