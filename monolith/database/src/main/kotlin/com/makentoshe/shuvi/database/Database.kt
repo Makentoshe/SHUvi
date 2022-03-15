@@ -3,14 +3,18 @@ package com.makentoshe.shuvi.database
 import com.makentoshe.shuvi.database.crossref.CrossrefDatabase
 import com.makentoshe.shuvi.database.device.DeviceDatabase
 import com.makentoshe.shuvi.database.sensor.SensorDatabase
+import com.makentoshe.shuvi.database.value.ValueDatabase
 
 interface Database {
     /** Database for any connected devices */
-    fun device() : DeviceDatabase
+    fun device(): DeviceDatabase
 
     /** Database for any sensor devices */
-    fun sensor() : SensorDatabase
+    fun sensor(): SensorDatabase
 
     /** Database for cross-references between entities */
     fun crossref(): CrossrefDatabase
+
+    /** Database for storing sensor values */
+    fun value(): ValueDatabase
 }
