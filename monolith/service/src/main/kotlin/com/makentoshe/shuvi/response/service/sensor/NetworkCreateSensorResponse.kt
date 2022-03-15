@@ -1,6 +1,6 @@
 package com.makentoshe.shuvi.response.service.sensor
 
-import com.makentoshe.shuvi.entity.service.NetworkSensor
+import com.makentoshe.shuvi.entity.service.NetworkSensor2
 import kotlinx.serialization.Serializable
 
 /**
@@ -11,7 +11,7 @@ sealed class NetworkCreateSensorResponse {
 
     @Serializable
     data class Success(
-        val sensor: NetworkSensor,
+        val sensor: NetworkSensor2,
     ) : NetworkGetSensorResponse()
 
     @Serializable
