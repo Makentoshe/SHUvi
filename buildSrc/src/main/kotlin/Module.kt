@@ -21,6 +21,7 @@ object Monolith {
     const val repositoryDeviceDelete = ":monolith:repository-device-delete"
     const val repositorySensorGet = ":monolith:repository-sensor-get"
     const val repositorySensorCreate = ":monolith:repository-sensor-create"
+    const val repositorySensorValue = ":monolith:repository-sensor-value"
 
     const val service = ":monolith:service"
     const val serviceDevices = ":monolith:service-devices"
