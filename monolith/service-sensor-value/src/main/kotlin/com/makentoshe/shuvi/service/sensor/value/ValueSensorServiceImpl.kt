@@ -18,7 +18,7 @@ class ValueSensorServiceImpl(
 
     override suspend fun handle(call: ServiceCall) {
         call.parameter(sensorIdParameter).andOtherLeft(call.receiveInt()) { sensorIdString, value ->
-            sensorValueRepository.create(CreateSensorValue(id = null, SensorId(sensorIdString), value))
+            sensorValueRepository.create(CreateSensorValue(valueId = null, SensorId(sensorIdString), value))
         }.flattenLeft().bimap({ createdSensorValue ->
             NetworkValueSensorResponse.Success(createdSensorValue)
         }, { exception ->

@@ -15,7 +15,9 @@ dependencies {
     implementation(project(dependency.module.monolith.entity))
     implementation(project(dependency.module.monolith.common))
     implementation(project(dependency.module.monolith.service))
+    implementation(project(dependency.module.monolith.database))
     implementation(project(dependency.module.monolith.repository))
+    implementation(project(dependency.module.monolith.repositorySensorValue))
 
     val koinVersion = dependency.version.koin
     implementation("io.insert-koin:koin-core:$koinVersion")

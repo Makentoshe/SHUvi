@@ -16,9 +16,9 @@ sealed class NetworkValueSensorResponse {
         val timestamp: String,
     ) : NetworkValueSensorResponse() {
         constructor(createdSensorValue: CreatedSensorValue) : this(
-            sensorId = createdSensorValue.sensorId.string,
-            value = createdSensorValue.value,
-            timestamp = createdSensorValue.timestamp,
+            sensorId = createdSensorValue.value.sensorId.string,
+            value = createdSensorValue.value.value,
+            timestamp = createdSensorValue.value.timestamp,
         )
     }
 
