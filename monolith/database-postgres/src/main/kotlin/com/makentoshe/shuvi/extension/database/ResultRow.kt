@@ -6,6 +6,8 @@ import com.makentoshe.shuvi.entity.database.crossref.DatabaseDeviceSensorsCrossr
 import com.makentoshe.shuvi.entity.database.table.DatabaseDeviceSensorsCrossrefTable
 import com.makentoshe.shuvi.entity.database.table.DatabaseDeviceTable
 import com.makentoshe.shuvi.entity.database.table.DatabaseSensorTable
+import com.makentoshe.shuvi.entity.database.table.DatabaseValueTable
+import com.makentoshe.shuvi.entity.database.value.DatabaseValue
 import org.jetbrains.exposed.sql.ResultRow
 
 internal fun ResultRow.toDatabaseDevice() = DatabaseDevice(
@@ -21,4 +23,11 @@ internal fun ResultRow.toDatabaseSensor() = DatabaseSensor(
 internal fun ResultRow.toDatabaseDeviceSensorCrossref() = DatabaseDeviceSensorsCrossref(
     deviceId = this[DatabaseDeviceSensorsCrossrefTable.deviceId],
     sensorId = this[DatabaseDeviceSensorsCrossrefTable.sensorId],
+)
+
+internal fun ResultRow.toDatabaseValue() = DatabaseValue(
+    valueId = this[DatabaseValueTable.valueId],
+    sensorId = this[DatabaseValueTable.sensorId],
+    value = this[DatabaseValueTable.value],
+    timestamp = this[DatabaseValueTable.timestamp],
 )
