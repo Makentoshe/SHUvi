@@ -6,7 +6,6 @@ import com.makentoshe.shuvi.entity.CreateSensor
 import com.makentoshe.shuvi.entity.database.table.DatabaseValueTable
 import com.makentoshe.shuvi.entity.database.value.DatabaseInsertedValue
 import com.makentoshe.shuvi.entity.database.value.DatabaseValue
-import com.makentoshe.shuvi.response.database.value.DatabaseInsertValueResponse
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.Transaction

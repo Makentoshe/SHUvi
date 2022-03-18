@@ -4,7 +4,7 @@ import com.makentoshe.shuvi.common.andOtherLeft
 import com.makentoshe.shuvi.common.flattenLeft
 import com.makentoshe.shuvi.entity.SensorId
 import com.makentoshe.shuvi.entity.sensor.value.CreateSensorValue
-import com.makentoshe.shuvi.repository.sensor.value.SensorValueRepository
+import com.makentoshe.shuvi.repository.sensor.value.ValueRepository
 import com.makentoshe.shuvi.response.service.sensor.NetworkValueSensorResponse
 import com.makentoshe.shuvi.service.ServiceCall
 import com.makentoshe.shuvi.service.parameter
@@ -13,7 +13,7 @@ import com.makentoshe.shuvi.service.sensor.ValueSensorService
 import io.ktor.http.HttpStatusCode
 
 class ValueSensorServiceImpl(
-    private val sensorValueRepository: SensorValueRepository,
+    private val sensorValueRepository: ValueRepository,
 ) : ValueSensorService {
 
     override suspend fun handle(call: ServiceCall) {

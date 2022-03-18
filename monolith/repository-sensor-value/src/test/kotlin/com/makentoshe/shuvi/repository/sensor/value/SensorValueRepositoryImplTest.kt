@@ -7,12 +7,14 @@ import com.makentoshe.shuvi.database.Database
 import com.makentoshe.shuvi.entity.SensorId
 import com.makentoshe.shuvi.entity.database.value.DatabaseInsertedValue
 import com.makentoshe.shuvi.entity.database.value.DatabaseValue
+import com.makentoshe.shuvi.entity.database.value.toValue
 import com.makentoshe.shuvi.entity.sensor.value.CreateSensorValue
 import com.makentoshe.shuvi.entity.sensor.value.SensorValueId
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.spyk
 import io.mockk.verify
+import javax.xml.crypto.Data
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -20,7 +22,7 @@ class SensorValueRepositoryImplTest {
 
     private val mockDatabase = mockk<Database>()
     private val spykGenerator = spyk(valueIdGenerator(SensorValueId("generated")))
-    private val repository = SensorValueRepositoryImpl(mockDatabase, spykGenerator)
+    private val repository = ValueRepositoryImpl(mockDatabase, spykGenerator)
 
     @Test
     fun `test should return exception on already created value`() {
@@ -85,6 +87,18 @@ class SensorValueRepositoryImplTest {
         assertEquals(left.createSensorValue, createValue)
         // check id generation was called (we can't check the value due to stubbed insertion result)
         verify(exactly = 1) { spykGenerator.generate }
+    }
+
+    @Test
+    fun `test should return all values from database`() {
+        // database request should be successful
+        val databaseValueList = buildList<DatabaseValue>(13) {
+            DatabaseValue("", "", 1, "") }
+        every { mockDatabase.value().get().all() } returns Either.Left(databaseValueList)
+
+        // check repository action is successful
+        val left = repository.all().left()
+        assertEquals(databaseValueList.map { it.toValue() }, left)
     }
 
     private fun valueIdGenerator(valueId: SensorValueId): ValueIdGenerator {

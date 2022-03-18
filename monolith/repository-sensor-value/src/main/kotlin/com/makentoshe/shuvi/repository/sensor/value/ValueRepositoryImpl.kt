@@ -7,12 +7,11 @@ import com.makentoshe.shuvi.entity.database.value.DatabaseValue
 import com.makentoshe.shuvi.entity.database.value.toValue
 import com.makentoshe.shuvi.entity.sensor.value.CreateSensorValue
 import com.makentoshe.shuvi.entity.sensor.value.CreatedSensorValue
-import com.makentoshe.shuvi.response.repository.sensor.value.CreateSensorValueResponse
 
-class SensorValueRepositoryImpl(
+class ValueRepositoryImpl(
     private val database: Database,
     private val generator: ValueIdGenerator,
-) : SensorValueRepository {
+) : ValueRepository {
 
     /** Return true if sensor exists and false otherwise */
     private val CreateSensorValue.isExists: Boolean
@@ -27,4 +26,9 @@ class SensorValueRepositoryImpl(
             CreatedSensorValue(value, databaseInsertedValue.value.toValue())
         }
     }
+
+    override fun all(limit: Int) = database.value().get().all(limit).mapLeft { databaseValues ->
+        databaseValues.map { databaseValue -> databaseValue.toValue() }
+    }
+
 }

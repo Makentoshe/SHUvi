@@ -5,17 +5,20 @@ import com.makentoshe.shuvi.database.Postgres
 import com.makentoshe.shuvi.entity.database.table.DatabaseValueTable
 import com.makentoshe.shuvi.entity.sensor.value.SensorValueId
 import com.makentoshe.shuvi.extension.database.toDatabaseValue
-import com.makentoshe.shuvi.response.database.value.DatabaseGetValueResponse
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.Transaction
 import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.selectAll
 
 class PostgressGetValueDatabase(override val database: Database) : Postgres(), GetValueDatabase {
-    override fun id(value: SensorValueId): DatabaseGetValueResponse = try {
+
+    override fun id(value: SensorValueId): DatabaseGetValueResponse = safeEither {
         transaction { transactionId(value) }
-    } catch (exception: Exception) {
-        Either.Right(exception)
+    }
+
+    override fun all(limit: Int): DatabaseGetValuesResponse = safeEither {
+        transaction { transactionAll(limit) }
     }
 
     private fun Transaction.transactionId(value: SensorValueId): DatabaseGetValueResponse {
@@ -23,8 +26,16 @@ class PostgressGetValueDatabase(override val database: Database) : Postgres(), G
 
         val record = DatabaseValueTable.select {
             DatabaseValueTable.valueId eq value.string
-        }.firstOrNull() ?: throw Exception("Not found Value with id ${value}")
+        }.firstOrNull() ?: throw Exception("Not found Value with id $value")
 
         return Either.Left(record.toDatabaseValue())
+    }
+
+    private fun Transaction.transactionAll(limit: Int) : DatabaseGetValuesResponse {
+        SchemaUtils.create(DatabaseValueTable)
+
+        val record = DatabaseValueTable.selectAll().limit(limit)
+
+        return Either.Left(record.toList().map { resultRow -> resultRow.toDatabaseValue() })
     }
 }
