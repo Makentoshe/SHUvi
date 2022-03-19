@@ -6,7 +6,7 @@ import com.makentoshe.shuvi.entity.sensor.value.SensorValueId
 
 interface GetValueDatabase {
     fun id(value: SensorValueId): DatabaseGetValueResponse
-    fun all(limit: Int = -1): DatabaseGetValuesResponse
+    fun all(limit: Int): DatabaseGetValuesResponse
 }
 
 typealias DatabaseGetValueResponse = Either<DatabaseValue, Exception>

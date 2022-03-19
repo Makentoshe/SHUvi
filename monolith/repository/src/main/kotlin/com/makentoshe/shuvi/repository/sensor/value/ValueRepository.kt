@@ -11,7 +11,7 @@ interface ValueRepository : Repository {
     fun create(value: CreateSensorValue): CreateSensorValueResponse
 
     // TODO rework with optional
-    fun all(limit: Int = -1): AllSensorValueResponse
+    fun all(limit: Int): AllSensorValueResponse
 }
 
 typealias CreateSensorValueResponse = Either<CreatedSensorValue, Exception>

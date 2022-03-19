@@ -33,6 +33,8 @@ dependencies {
     implementation(project(dependency.module.monolith.serviceSensorCreate))
     implementation(project(dependency.module.monolith.serviceSensorValue))
 
+    implementation(project(dependency.module.monolith.serviceValueGet))
+
     val ktorVersion = dependency.version.ktor
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-host-common:$ktorVersion")

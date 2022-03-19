@@ -93,11 +93,12 @@ class SensorValueRepositoryImplTest {
     fun `test should return all values from database`() {
         // database request should be successful
         val databaseValueList = buildList<DatabaseValue>(13) {
-            DatabaseValue("", "", 1, "") }
-        every { mockDatabase.value().get().all() } returns Either.Left(databaseValueList)
+            DatabaseValue("", "", 1, "")
+        }
+        every { mockDatabase.value().get().all(13) } returns Either.Left(databaseValueList)
 
         // check repository action is successful
-        val left = repository.all().left()
+        val left = repository.all(13).left()
         assertEquals(databaseValueList.map { it.toValue() }, left)
     }
 

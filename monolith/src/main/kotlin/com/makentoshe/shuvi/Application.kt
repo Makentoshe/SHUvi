@@ -71,5 +71,9 @@ private fun Application.configureRouting(component: RoutingComponent) {
         route(component.valueSensorService.routing, component.valueSensorService.method) {
             this.handle { component.valueSensorService.handle(call) }
         }
+
+        route(component.getValueService.routing, component.getValueService.method) {
+            this.handle { component.getValueService.handle(call) }
+        }
     }
 }

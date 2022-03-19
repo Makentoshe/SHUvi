@@ -52,3 +52,8 @@ fun ServiceCall.parameter(name: String): Either<String, Exception> {
     val value = parameters[name]
     return if (value == null) Either.Right(Exception("$name parameter issue")) else Either.Left(value)
 }
+
+fun ServiceCall.query(name: String): Either<String, Exception> {
+    val value = queries[name]
+    return if (value == null) Either.Right(Exception("$name query issue")) else Either.Left(value)
+}

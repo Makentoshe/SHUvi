@@ -7,6 +7,7 @@ import com.makentoshe.shuvi.service.device.DevicesService
 import com.makentoshe.shuvi.service.sensor.CreateSensorService
 import com.makentoshe.shuvi.service.sensor.GetSensorService
 import com.makentoshe.shuvi.service.sensor.ValueSensorService
+import com.makentoshe.shuvi.service.value.GetValueService
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -19,4 +20,6 @@ class RoutingComponent : KoinComponent {
     val getSensorService by inject<GetSensorService>()
     val createSensorService by inject<CreateSensorService>()
     val valueSensorService by inject<ValueSensorService>()
+
+    val getValueService by inject<GetValueService>()
 }

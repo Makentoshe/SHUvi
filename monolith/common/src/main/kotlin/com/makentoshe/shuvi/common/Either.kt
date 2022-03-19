@@ -61,6 +61,10 @@ fun <TLeft> Either<TLeft, Any>.leftOrNull(): TLeft? {
     return (this as? Either.Left)?.value
 }
 
+fun <TLeft> Either<TLeft, Any>.leftOrElse(default: () -> TLeft): TLeft {
+    return leftOrNull() ?: default()
+}
+
 fun <TLeft, TRight> Either<Either<TLeft, TRight>, TRight>.flattenLeft(): Either<TLeft, TRight> = when (this) {
     is Either.Right -> this
     is Either.Left -> flatMapLeft { it }

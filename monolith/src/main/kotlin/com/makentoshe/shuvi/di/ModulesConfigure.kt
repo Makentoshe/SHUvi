@@ -14,6 +14,7 @@ import com.makentoshe.shuvi.service.devices.di.DevicesServiceModule
 import com.makentoshe.shuvi.service.sensor.create.di.CreateSensorServiceModule
 import com.makentoshe.shuvi.service.sensor.di.GetSensorServiceModule
 import com.makentoshe.shuvi.service.sensor.value.di.ValueSensorServiceModule
+import com.makentoshe.shuvi.service.value.get.di.GetValueServiceModule
 import org.apache.commons.cli.CommandLine
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
@@ -29,6 +30,7 @@ fun configureModules(commandLine: CommandLine) = startKoin {
         GetSensorServiceModule,
         CreateSensorServiceModule,
         ValueSensorServiceModule,
+        GetValueServiceModule,
     )
 }
 

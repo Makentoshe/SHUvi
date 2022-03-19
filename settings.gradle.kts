@@ -25,4 +25,4 @@ include("monolith:service-sensor")
 include("monolith:service-sensor-create")
 include("monolith:service-sensor-value")
 include("monolith:repository-sensor-value")
-findProject(":monolith:repository-sensor-value")?.name = "repository-sensor-value"
+include("monolith:service-value-get")
