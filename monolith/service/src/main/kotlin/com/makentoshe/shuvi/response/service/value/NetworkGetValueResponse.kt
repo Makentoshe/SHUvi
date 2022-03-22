@@ -1,6 +1,5 @@
 package com.makentoshe.shuvi.response.service.value
 
-import com.makentoshe.shuvi.entity.sensor.value.CreatedSensorValue
 import com.makentoshe.shuvi.entity.service.value.NetworkValue
 import kotlinx.serialization.Serializable
 

@@ -2,7 +2,9 @@ package com.makentoshe.shuvi.database.value
 
 import com.makentoshe.shuvi.common.Either
 import com.makentoshe.shuvi.database.Postgres
+import com.makentoshe.shuvi.entity.SensorId
 import com.makentoshe.shuvi.entity.database.table.DatabaseValueTable
+import com.makentoshe.shuvi.entity.database.value.DatabaseValue
 import com.makentoshe.shuvi.entity.sensor.value.SensorValueId
 import com.makentoshe.shuvi.extension.database.toDatabaseValue
 import org.jetbrains.exposed.sql.Database
@@ -17,8 +19,12 @@ class PostgressGetValueDatabase(override val database: Database) : Postgres(), G
         transaction { transactionId(value) }
     }
 
-    override fun all(limit: Int): DatabaseGetValuesResponse = safeEither {
+    override fun all(limit: Int): DatabaseGetAllValuesResponse = safeEither {
         transaction { transactionAll(limit) }
+    }
+
+    override fun sensor(sensorId: SensorId, limit: Int): DatabaseGetSensorValuesResponse = safeEither {
+        transaction { transactionSensor(sensorId, limit) }
     }
 
     private fun Transaction.transactionId(value: SensorValueId): DatabaseGetValueResponse {
@@ -31,10 +37,20 @@ class PostgressGetValueDatabase(override val database: Database) : Postgres(), G
         return Either.Left(record.toDatabaseValue())
     }
 
-    private fun Transaction.transactionAll(limit: Int) : DatabaseGetValuesResponse {
+    private fun Transaction.transactionAll(limit: Int): DatabaseGetAllValuesResponse {
         SchemaUtils.create(DatabaseValueTable)
 
         val record = DatabaseValueTable.selectAll().limit(limit)
+
+        return Either.Left(record.toList().map { resultRow -> resultRow.toDatabaseValue() })
+    }
+
+    private fun Transaction.transactionSensor(sensorId: SensorId, limit: Int): Either.Left<List<DatabaseValue>> {
+        SchemaUtils.create(DatabaseValueTable)
+
+        val record = DatabaseValueTable.select {
+            DatabaseValueTable.sensorId eq sensorId.string
+        }.limit(limit)
 
         return Either.Left(record.toList().map { resultRow -> resultRow.toDatabaseValue() })
     }

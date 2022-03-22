@@ -1,6 +1,6 @@
 package com.makentoshe.shuvi.entity.sensor.value
 
-data class CreatedSensorValue(
+data class CreatedValue(
     val createSensorValue: CreateSensorValue,
     val value: Value
 )

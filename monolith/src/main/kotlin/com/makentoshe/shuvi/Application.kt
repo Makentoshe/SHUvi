@@ -2,11 +2,13 @@ package com.makentoshe.shuvi
 
 import com.makentoshe.shuvi.cli.config.ServerConfig
 import com.makentoshe.shuvi.di.configureModules
+import com.makentoshe.shuvi.service.Service
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.ContentNegotiation
 import io.ktor.response.respondText
+import io.ktor.routing.Routing
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.route
@@ -72,8 +74,8 @@ private fun Application.configureRouting(component: RoutingComponent) {
             this.handle { component.valueSensorService.handle(call) }
         }
 
-        route(component.getValueService.routing, component.getValueService.method) {
-            this.handle { component.getValueService.handle(call) }
+        route(component.getValuesService.routing, component.getValuesService.method) {
+            this.handle { component.getValuesService.handle(call) }
         }
     }
 }
